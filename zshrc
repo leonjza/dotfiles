@@ -78,6 +78,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pc="proxychains4 -q"
+alias chain="proxychains4 -q"
 #rbenv hax
 eval "$(rbenv init -)"
