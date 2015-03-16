@@ -79,5 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias chain="proxychains4 -q"
+alias please='sudo $(fc -ln -1)'
+
 #rbenv hax
 eval "$(rbenv init -)"
