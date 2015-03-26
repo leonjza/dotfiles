@@ -1,0 +1,40 @@
+{
+    "caret_extra_width": 1,
+    "caret_style": "phase",
+    "close_windows_when_empty": false,
+    "color_scheme": "Packages/Theme - Fox/fox.dark.tmTheme",
+    "copy_with_empty_selection": false,
+    "drag_text": false,
+    "draw_minimap_border": true,
+    "enable_tab_scrolling": false,
+    "findreplace_small": true,
+    "font_options":
+    [
+        "no_round"
+    ],
+    "font_size": 13,
+    "highlight_line": true,
+    "ignored_packages":
+    [
+    ],
+    "match_brackets_content": false,
+    "match_selection": false,
+    "match_tags": false,
+    "open_files_in_new_window": false,
+    "overlay_scroll_bars": "enabled",
+    "preview_on_click": true,
+    "scroll_past_end": true,
+    "scroll_speed": 5.0,
+    "show_full_path": false,
+    "sidebar_default": true,
+    "sidebar_xsmall": true,
+    "soda_classic_tabs": true,
+    "soda_folder_icons": true,
+    "tabs_small": true,
+    "theme": "Spacegray.sublime-theme",
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": true,
+    "vintage_start_in_command_mode": true,
+    "word_wrap": false
+}
+
