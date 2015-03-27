@@ -2,7 +2,7 @@
     "caret_extra_width": 1,
     "caret_style": "phase",
     "close_windows_when_empty": false,
-    "color_scheme": "Packages/Theme - Fox/fox.dark.tmTheme",
+    "color_scheme": "Packages/Dayle Rees Color Schemes/sublime/super.tmTheme",
     "copy_with_empty_selection": false,
     "drag_text": false,
     "draw_minimap_border": true,
@@ -31,10 +31,18 @@
     "soda_classic_tabs": true,
     "soda_folder_icons": true,
     "tabs_small": true,
-    "theme": "Spacegray.sublime-theme",
+    "theme": "Fox.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
     "vintage_start_in_command_mode": true,
     "word_wrap": false
 }
+
+// Installed ST3 Packages
+//
+// - BracketHighlighter
+// - Dayle Reese Color Schemes
+// - DockBlockr
+// - SideBarEnhancements
+// - Theme - Fox
 
