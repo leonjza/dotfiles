@@ -1,4 +1,5 @@
-" Setup with git clone https://github.com/gmarik/Vundle.vim in ~/.vim/bundle
+" Setup with git clone https://github.com/gmarik/Vundle.vim in
+" ~/.vim/bundle/Vundle.vim
 " first. Then :PluginInstall after this rc is written
 
 " Gotta be first

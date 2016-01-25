@@ -85,9 +85,6 @@ source $ZSH/oh-my-zsh.sh
 alias chain="proxychains4 -q"
 alias please='sudo $(fc -ln -1)'
 
-#rbenv hax
-eval "$(rbenv init -)"
-
 # Clear the RPROMPT
 RPROMPT=""
 
