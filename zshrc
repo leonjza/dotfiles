@@ -48,7 +48,7 @@ ZSH_THEME="af-magic"
 #
 # Install syntax highlighter ater oh-my-zsh
 # https://github.com/zsh-users/zsh-syntax-highlighting#with-oh-my-zsh
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 # User configuration
 

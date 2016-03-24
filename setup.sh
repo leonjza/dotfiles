@@ -20,6 +20,8 @@ echo "[+] running oh-my-zsh installer"
 sh -c "$(cat /tmp/zsh-install.sh)"
 echo "[+] installing zsh-syntax-highlighting"
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+echo "[+] installing zsh-autosuggestions"
+git clone git://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 echo "[+] downloading .zshrc"
 curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/zshrc -o ~/.zshrc
 echo "[+] cleaning up the downloaded installer"
