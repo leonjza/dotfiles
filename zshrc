@@ -85,6 +85,11 @@ source $ZSH/oh-my-zsh.sh
 alias chain="proxychains4 -q"
 alias please='sudo $(fc -ln -1)'
 
+# Alias locate on OSX to Spotlights mdfind -name
+if hash mdfind 2>/dev/null; then
+    alias locate="mdfind -name"
+fi
+
 # Clear the RPROMPT
 RPROMPT=""
 
