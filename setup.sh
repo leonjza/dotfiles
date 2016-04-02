@@ -3,12 +3,12 @@
 # dotfiles configuration script
 #
 
-prereqs=(vim zsh tmux curl)
+prereqs=(vim zsh tmux curl git)
 
 for i in "${prereqs[@]}"
 do
-	command -v $i >/dev/null 2>&1 || { echo \
-		"I require $i but it's not installed.  Aborting." >&2; exit 1; }
+   command -v $i >/dev/null 2>&1 || { echo \
+    "I require $i but it's not installed. Aborting." >&2; exit 1; }
 done
 
 echo "[+] zsh setup."
