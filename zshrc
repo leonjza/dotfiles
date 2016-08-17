@@ -13,7 +13,7 @@ ZSH_THEME="af-magic"
 #
 # Install syntax highlighter ater oh-my-zsh
 # https://github.com/zsh-users/zsh-syntax-highlighting#with-oh-my-zsh
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker extract httpie)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker extract httpie colored-man-pages)
 
 # User configuration
 
