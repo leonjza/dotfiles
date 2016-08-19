@@ -11,7 +11,7 @@ ZSH_THEME="af-magic"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #
-# Install syntax highlighter ater oh-my-zsh
+# Install syntax highlighter after oh-my-zsh
 # https://github.com/zsh-users/zsh-syntax-highlighting#with-oh-my-zsh
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker extract httpie colored-man-pages)
 
@@ -25,6 +25,7 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 alias chain="proxychains4 -q"
 alias please='sudo $(fc -ln -1)'
+alias p="passpie"
 
 # Alias ports to lsof for tcp connections
 if hash lsof 2>/dev/null; then
