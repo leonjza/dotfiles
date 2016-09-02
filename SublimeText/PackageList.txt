@@ -1,0 +1,10 @@
+BracketHighlighter
+Dayle Rees Color Schemes
+DocBlockr
+Jinja2
+Material Theme
+Material Theme - Appbar
+SidebarEnhancements
+Theme - Fox
+Theme - Spacegray
+

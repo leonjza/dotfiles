@@ -6,6 +6,8 @@ This repository contains my public dotfiles. It includes a `Makefile` for instal
 ## screenshots
 ### Vi
 ![vim](screenshots/vim.png "Vi")
+### Sublime Text
+![ZSH](screenshots/sublime.png "ZSH Shell")
 ### Zsh
 ![ZSH](screenshots/shell.png "ZSH Shell")
 
