@@ -14,7 +14,7 @@ This repository contains my public dotfiles. It includes a `Makefile` for instal
 ## installation
 Install these dotfile with the following command (installs all of the sections)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/Makefile -o && make
+curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/Makefile -o Makefile && make
 ````
 
 To make sure the colors show correctly, as well as the unicode displays correctly, ensure that your `TERM` and `LANG` environment variables are set in your shell:
