@@ -188,6 +188,10 @@ function install_zsh() {
         return
     fi
 
+    # Ensure that *.d directory exists
+    echo_debug "Creating *.d directory in $HOME/.dotfiles.d/zshrc.d"
+    mkdir -p $HOME/.dotfiles.d/zshrc.d
+
     echo "Downloading oh-my-zsh installer"
     echo_debug "Saving installer to $temp"
     curl "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" $temp
@@ -227,6 +231,9 @@ function install_zsh() {
 
     echo_debug "Symlinking $gitpath/zshrc to $zsh_rc"
     ln -s $gitpath/zshrc $zsh_rc
+
+    echo "Symlinking *.zsh files to $HOME/.dotfiles.d/zshrc.d/"
+    ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d
 
     echo_green "ZSH config install complete!"
 
