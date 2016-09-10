@@ -15,7 +15,7 @@ The following command will install everything, backing up existing configs first
 ### Zsh
 ![ZSH](screenshots/shell.png "ZSH Shell")
 
-## installation
+## installation (old Makefile way. Use back installer instead)
 Install these dotfile with the following command (installs all of the sections)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/Makefile -o Makefile && make
