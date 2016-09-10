@@ -169,7 +169,8 @@ function restore_config() {
     local base=$(basename $config)
 
     # search for the latest backup in the backup directory
-    filename=$(ls $rc_backup_dir | grep $base | sort -n -t _ -k 2 | tail -1)
+    filename=$(ls -a $rc_backup_dir | grep $base | sort -n -t _ -k 2 | tail -1)
+    echo_debug "Backupfile lookup returned: $filename"
 
     if [[ ! "$filename" == "" ]]; then
 
@@ -177,7 +178,7 @@ function restore_config() {
         cp -f $rc_backup_dir/$filename $config
 
     else
-        echo_warning "No backup of $config could be found. nothing to restore."
+        echo_yellow "No backup of $config could be found. nothing to restore."
     fi
 }
 
@@ -266,7 +267,7 @@ function install_zsh() {
     fi
 
     echo_debug "Symlinking $gitpath/zshrc to $zsh_rc"
-    ln -s $gitpath/zshrc $zsh_rc
+    ln -sf $gitpath/zshrc $zsh_rc
 
     echo "Symlinking *.zsh files to $HOME/.dotfiles.d/zshrc.d/"
     ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d
@@ -316,7 +317,7 @@ function install_vim() {
     fi
 
     echo_debug "Symlinking $gitpath/vimrc to $vim_rc"
-    ln -s $gitpath/vimrc $vim_rc
+    ln -sf $gitpath/vimrc $vim_rc
 
     echo "Symlinking *.vim files to $HOME/.dotfiles.d/vimrc.d/"
     ln -sf $gitpath/dotfiles.d/vimrc.d/* $HOME/.dotfiles.d/vimrc.d
@@ -346,7 +347,7 @@ function install_tmux() {
     fi
 
     echo_debug "Symlinking $gitpath/tmux.conf to $tmux_conf"
-    ln -s $gitpath/tmux.conf $tmux_conf
+    ln -sf $gitpath/tmux.conf $tmux_conf
 
     echo_green "Tmux config install complete!"
 }
