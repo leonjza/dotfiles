@@ -14,6 +14,9 @@ To see what things look like, skip straight to [screenshots](#screenshots)!
 - [extending](#extending)
 - [errors](#errors)
 
+### other
+- [sublime tex](#sublime-text)
+
 ## installing
 The following command will install everything, backing up existing configs first and make available a new `dotfiles` command:
 
@@ -162,3 +165,8 @@ TERM=xterm-256color
 You should probably also set this in your terminal emulator (iTerm2 in my case) or as an `export` in your local `~/.dotfiles.d/zshrc.d/config.zsh` file:
 
 ![ZSH](screenshots/iterm_profile.png "ZSH Shell")
+
+## other
+
+### sublime text
+For the sublime text installation process, please refer to the [README](https://github.com/leonjza/dotfiles/tree/master/SublimeText).
