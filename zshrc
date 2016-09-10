@@ -26,9 +26,9 @@ source $ZSH/oh-my-zsh.sh
 RPROMPT=""
 
 # Load all *.zsh files from ~/.dotfiles.d/zshrc.d directory
-if [ -d $HOME/.shellrc/zshrc.d ]; then
+if [ -d $HOME/.dotfiles.d/zshrc.d ]; then
 
-  for file in $HOME/.shellrc/zshrc.d/*.zsh; do
+  for file in $HOME/.dotfiles.d/zshrc.d/*.zsh; do
     source $file
   done
 
