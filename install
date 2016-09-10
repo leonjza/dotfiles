@@ -342,7 +342,7 @@ function uninstall_components() {
             rm -f $tmux_conf
             rm -Rf $gitpath
 
-            echo_warning "User confirgurations in $HOME/.dotfiles.d have been left behind"
+            echo_yellow "User confirgurations in $HOME/.dotfiles.d have been left behind"
         ;;
         vim)
             echo_yellow "Uninstalling Vim configuration"
