@@ -146,6 +146,40 @@ function validate_configuration() {
 
 }
 
+function backup_config() {
+
+    local config=$1
+
+    # add a date to the config file
+    local filename=$config$(date +"%s")
+
+    # make sure the backup dir exists
+    mkdir -p $rc_backup_dir
+
+    # copy the config file to the backup dir
+    echo_green "Backing up config file $config to $rc_backup_dir/$filename"
+    cp -f $config $rc_backup_dir/$filename
+
+}
+
+function restore_config() {
+
+    local config=$1
+    local base=$(basename $config)
+
+    # search for the latest backup in the backup directory
+    filename=$(ls $rc_backup_dir | grep $base | sort -n -t _ -k 2 | tail -1)
+
+    if [[ ! "$filename" == "" ]]; then
+
+        echo_green "Restoring last backup of $base to $config wihch is $filename"
+        cp -f $rc_backup_dir/$filename $config
+
+    else
+        echo_warning "No backup of $config could be found. nothing to restore."
+    fi
+}
+
 function install_components() {
 
     # check that the install target is something we know if
@@ -225,10 +259,9 @@ function install_zsh() {
 
     echo "Installing Zsh configuration file"
 
+    ## Backup the current one
     if [[ -f "$zsh_rc" ]]; then
-        echo_yellow "Backing up existing zshrc to $rc_backup_dir/zshrc.backup"
-        mkdir -p $rc_backup_dir
-        mv $zsh_rc $rc_backup_dir/zshrc.backup
+        backup_config $zsh_rc
     fi
 
     echo_debug "Symlinking $gitpath/zshrc to $zsh_rc"
@@ -276,10 +309,9 @@ function install_vim() {
 
     echo "Installing Vim configuration file"
 
+    ## Backup the current one
     if [[ -f "$vim_rc" ]]; then
-        echo_yellow "Backing up existing vimrc to $rc_backup_dir/vimrc.backup"
-        mkdir -p $rc_backup_dir
-        mv $vim_rc $rc_backup_dir/vimrc.backup
+        backup_config $vim_rc
     fi
 
     echo_debug "Symlinking $gitpath/vimrc to $vim_rc"
@@ -307,10 +339,9 @@ function install_tmux() {
 
     echo "Installing Tmux configuration file"
 
+    ## Backup the current one
     if [[ -f "$tmux_conf" ]]; then
-        echo_yellow "Backing up existing tmuxconf to $rc_backup_dir/tmuxconf.backup"
-        mkdir -p $rc_backup_dir
-        mv $tmux_conf $rc_backup_dir/tmuxconf.backup
+        backup_config $tmux_conf
     fi
 
     echo_debug "Symlinking $gitpath/tmux.conf to $tmux_conf"
@@ -342,31 +373,16 @@ function uninstall_components() {
             rm -Rf $oh_my_zsh
             rm -f $zsh_rc
             echo "Attempting to restore a backup zshrc if it exists"
-            if [[ -f "$rc_backup_dir/zshrc.backup" ]]; then
-
-                echo_debug "Moving $rc_backup_dir/zshrc.backup to $zsh_rc"
-                mv $rc_backup_dir/zshrc.backup $zsh_rc
-
-            fi
+            restore_config $zsh_rc
 
             rm -Rf $vim_plugin_dir
             rm -f $vim_rc
             echo "Attempting to restore a backup vimrc if it exists"
-            if [[ -f "$rc_backup_dir/vimrc.backup" ]]; then
-
-                echo_debug "Moving $rc_backup_dir/vimrc.backup to $vim_rc"
-                mv $rc_backup_dir/vimrc.backup $vim_rc
-
-            fi
+            restore_config $vim_rc
 
             rm -f $tmux_conf
             echo "Attempting to restore a backup tmux.conf if it exists"
-            if [[ -f "rc_backup_dir/tmuxconf.backup" ]]; then
-
-                echo_debug "Moving rc_backup_dir/tmuxconf.backup to $tmux_conf"
-                mv rc_backup_dir/tmuxconf.backup $tmux_conf
-
-            fi
+            restore_config $tmux_conf
 
             echo_red "Removing source dotfiles repository $gitpath"
             rm -Rf $gitpath
@@ -381,33 +397,18 @@ function uninstall_components() {
             rm -Rf $oh_my_zsh
             rm -f $zsh_rc
             echo "Attempting to restore a backup zshrc if it exists"
-            if [[ -f "$rc_backup_dir/zshrc.backup" ]]; then
-
-                echo_debug "Moving $rc_backup_dir/zshrc.backup to $zsh_rc"
-                mv $rc_backup_dir/zshrc.backup $zsh_rc
-
-            fi
+            restore_config $zsh_rc
         ;;
         vim)
             rm -Rf $vim_plugin_dir
             rm -f $vim_rc
             echo "Attempting to restore a backup vimrc if it exists"
-            if [[ -f "$rc_backup_dir/vimrc.backup" ]]; then
-
-                echo_debug "Moving $rc_backup_dir/vimrc.backup to $vim_rc"
-                mv $rc_backup_dir/vimrc.backup $vim_rc
-
-            fi
+            restore_config $vim_rc
         ;;
         tmux)
             rm -f $tmux_conf
             echo "Attempting to restore a backup tmux.conf if it exists"
-            if [[ -f "rc_backup_dir/tmuxconf.backup" ]]; then
-
-                echo_debug "Moving rc_backup_dir/tmuxconf.backup to $tmux_conf"
-                mv rc_backup_dir/tmuxconf.backup $tmux_conf
-
-            fi
+            restore_config $tmux_conf
         ;;
     esac
 
@@ -430,65 +431,70 @@ function update_repo() {
     echo_green "Update complete. You may want to close/re-open your session for changes to take effect."
 }
 
+function main() {
+
+    # parse commandline arguments
+    if [[ $# -gt 1 ]]; then
+
+        while [[ $# -gt 1 ]]; do
+            case $1 in
+            -i|--install)
+            install_target="$2"
+            shift # past argument
+            ;;
+            -r|--remove)
+            uninstall_target="$2"
+            shift # past argument
+            ;;
+            -u|--update)
+            update=true
+            shift # past argument
+            ;;
+            *)
+            showusage="yes"
+            ;;
+        esac
+
+        shift # past argument or value
+        done
+    else
+        echo_debug "Running usage(), no args -gt 1 found"
+        usage
+    fi
+
+    # usage
+    if [ "$showusage" = "yes" ]; then
+        usage
+        exit 2
+    fi
+
+    # install
+    if [[ ! "$install_target" = "no" ]]; then
+        echo "Running install on: $install_target"
+        install_components
+    fi
+
+    if [[ ! "$uninstall_target" = "no" ]]; then
+        echo "Running uninstall on: $uninstall_target"
+        uninstall_components
+    fi
+
+    if [[ "$update" = true ]]; then
+        echo "Running repo update"
+        update_repo
+    fi
+}
+
 # start by checking the software needed by this installer
 # if we cant find it, rather die
 for cmd in "curl" "git"; do
 
     if ! hash $cmd 2>/dev/null; then
-        echo_red "'$cmd' can not be found. Please install it before using this script"
+        echo_red "'$cmd' can not be found. Please install it before using this script."
         exit 2
     fi
     echo_debug "Using $cmd from $(which $cmd)"
 
 done
 
-# parse commandline arguments
-if [[ $# -gt 1 ]]; then
-
-    while [[ $# -gt 1 ]]; do
-        case $1 in
-        -i|--install)
-        install_target="$2"
-        shift # past argument
-        ;;
-        -r|--remove)
-        uninstall_target="$2"
-        shift # past argument
-        ;;
-        -u|--update)
-        update=true
-        shift # past argument
-        ;;
-        *)
-        showusage="yes"
-        ;;
-    esac
-
-    shift # past argument or value
-    done
-else
-    echo_debug "Running usage(), no args -gt 1 found"
-    usage
-fi
-
-# usage
-if [ "$showusage" = "yes" ]; then
-    usage
-    exit 2
-fi
-
-# install
-if [[ ! "$install_target" = "no" ]]; then
-    echo "Running install on: $install_target"
-    install_components
-fi
-
-if [[ ! "$uninstall_target" = "no" ]]; then
-    echo "Running uninstall on: $uninstall_target"
-    uninstall_components
-fi
-
-if [[ "$update" = true ]]; then
-    echo "Running repo update"
-    update_repo
-fi
+main
