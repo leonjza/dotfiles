@@ -249,6 +249,10 @@ function install_vim() {
         return
     fi
 
+    # Ensure that *.d directory exists
+    echo_debug "Creating *.d directory in $HOME/.dotfiles.d/vimrc.d"
+    mkdir -p $HOME/.dotfiles.d/vimrc.d
+
     echo_debug "Preparing the vim plugin directory at $vim_plugin_dir"
     mkdir -p $vim_plugin_dir
 
@@ -277,6 +281,9 @@ function install_vim() {
 
     echo_debug "Symlinking $gitpath/vimrc to $vim_rc"
     ln -s $gitpath/vimrc $vim_rc
+
+    echo "Symlinking *.vim files to $HOME/.dotfiles.d/vimrc.d/"
+    ln -sf $gitpath/dotfiles.d/vimrc.d/* $HOME/.dotfiles.d/vimrc.d
 
     echo "Running vim plugin installer"
     vim +PluginInstall +qall
