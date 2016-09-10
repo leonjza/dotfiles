@@ -151,13 +151,14 @@ function backup_config() {
     local config=$1
 
     # add a date to the config file
-    local filename=$config$(date +"%s")
+    local filename=$(basename $config-$(date +"%s"))
 
     # make sure the backup dir exists
     mkdir -p $rc_backup_dir
 
     # copy the config file to the backup dir
-    echo_green "Backing up config file $config to $rc_backup_dir/$filename"
+    echo_green "Backing up config file $config"
+    echo_debug "Config backup goes to $rc_backup_dir/$filename"
     cp -f $config $rc_backup_dir/$filename
 
 }
@@ -172,7 +173,7 @@ function restore_config() {
 
     if [[ ! "$filename" == "" ]]; then
 
-        echo_green "Restoring last backup of $base to $config wihch is $filename"
+        echo_green "Restoring last backup of $base to $config which is $filename"
         cp -f $rc_backup_dir/$filename $config
 
     else
