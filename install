@@ -35,6 +35,7 @@ zsh_rc="$HOME/.zshrc"
 vim_plugin_dir="$HOME/.vim"
 vim_rc="$HOME/.vimrc"
 tmux_conf="$HOME/.tmux.conf"
+rc_backup_dir="$HOME/.dotfiles.d/backups"
 
 # helper functions
 # colors!
@@ -225,8 +226,9 @@ function install_zsh() {
     echo "Installing Zsh configuration file"
 
     if [[ -f "$zsh_rc" ]]; then
-        echo_yellow "Backing up existing zshrc to $HOME/zshrc.backup"
-        mv $zsh_rc $HOME/zshrc.backup
+        echo_yellow "Backing up existing zshrc to $rc_backup_dir/zshrc.backup"
+        mkdir -p $rc_backup_dir
+        mv $zsh_rc $rc_backup_dir/zshrc.backup
     fi
 
     echo_debug "Symlinking $gitpath/zshrc to $zsh_rc"
@@ -275,8 +277,9 @@ function install_vim() {
     echo "Installing Vim configuration file"
 
     if [[ -f "$vim_rc" ]]; then
-        echo_yellow "Backing up existing vimrc to $HOME/vimrc.backup"
-        mv $vim_rc $HOME/vimrc.backup
+        echo_yellow "Backing up existing vimrc to $rc_backup_dir/vimrc.backup"
+        mkdir -p $rc_backup_dir
+        mv $vim_rc $rc_backup_dir/vimrc.backup
     fi
 
     echo_debug "Symlinking $gitpath/vimrc to $vim_rc"
@@ -305,8 +308,9 @@ function install_tmux() {
     echo "Installing Tmux configuration file"
 
     if [[ -f "$tmux_conf" ]]; then
-        echo_yellow "Backing up existing tmuxconf to $HOME/tmuxconf.backup"
-        mv $tmux_conf $HOME/tmuxconf.backup
+        echo_yellow "Backing up existing tmuxconf to $rc_backup_dir/tmuxconf.backup"
+        mkdir -p $rc_backup_dir
+        mv $tmux_conf $rc_backup_dir/tmuxconf.backup
     fi
 
     echo_debug "Symlinking $gitpath/tmux.conf to $tmux_conf"
@@ -332,23 +336,78 @@ function uninstall_components() {
             echo_yellow "Uninstalling everything"
 
             # restore the shell back to bash
-            echo_yellow "Changing your shell back to bash!"
+            echo "Changing your shell back to bash!"
             chsh -s $(grep /bash$ /etc/shells | tail -1)
 
             rm -Rf $oh_my_zsh
             rm -f $zsh_rc
+            echo "Attempting to restore a backup zshrc if it exists"
+            if [[ -f "$rc_backup_dir/zshrc.backup" ]]; then
+
+                echo_debug "Moving $rc_backup_dir/zshrc.backup to $zsh_rc"
+                mv $rc_backup_dir/zshrc.backup $zsh_rc
+
+            fi
+
             rm -Rf $vim_plugin_dir
             rm -f $vim_rc
+            echo "Attempting to restore a backup vimrc if it exists"
+            if [[ -f "$rc_backup_dir/vimrc.backup" ]]; then
+
+                echo_debug "Moving $rc_backup_dir/vimrc.backup to $vim_rc"
+                mv $rc_backup_dir/vimrc.backup $vim_rc
+
+            fi
+
             rm -f $tmux_conf
+            echo "Attempting to restore a backup tmux.conf if it exists"
+            if [[ -f "rc_backup_dir/tmuxconf.backup" ]]; then
+
+                echo_debug "Moving rc_backup_dir/tmuxconf.backup to $tmux_conf"
+                mv rc_backup_dir/tmuxconf.backup $tmux_conf
+
+            fi
+
+            echo_red "Removing source dotfiles repository $gitpath"
             rm -Rf $gitpath
 
-            echo_yellow "User confirgurations in $HOME/.dotfiles.d have been left behind"
+            echo_yellow "User confirgurations in $HOME/.dotfiles.d have been left behind!"
+        ;;
+        zsh)
+            # restore the shell back to bash
+            echo "Changing your shell back to bash!"
+            chsh -s $(grep /bash$ /etc/shells | tail -1)
+
+            rm -Rf $oh_my_zsh
+            rm -f $zsh_rc
+            echo "Attempting to restore a backup zshrc if it exists"
+            if [[ -f "$rc_backup_dir/zshrc.backup" ]]; then
+
+                echo_debug "Moving $rc_backup_dir/zshrc.backup to $zsh_rc"
+                mv $rc_backup_dir/zshrc.backup $zsh_rc
+
+            fi
         ;;
         vim)
-            echo_yellow "Uninstalling Vim configuration"
             rm -Rf $vim_plugin_dir
             rm -f $vim_rc
-            #TODO Restore backed up rc file
+            echo "Attempting to restore a backup vimrc if it exists"
+            if [[ -f "$rc_backup_dir/vimrc.backup" ]]; then
+
+                echo_debug "Moving $rc_backup_dir/vimrc.backup to $vim_rc"
+                mv $rc_backup_dir/vimrc.backup $vim_rc
+
+            fi
+        ;;
+        tmux)
+            rm -f $tmux_conf
+            echo "Attempting to restore a backup tmux.conf if it exists"
+            if [[ -f "rc_backup_dir/tmuxconf.backup" ]]; then
+
+                echo_debug "Moving rc_backup_dir/tmuxconf.backup to $tmux_conf"
+                mv rc_backup_dir/tmuxconf.backup $tmux_conf
+
+            fi
         ;;
     esac
 
