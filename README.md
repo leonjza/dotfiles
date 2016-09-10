@@ -1,7 +1,11 @@
 # dotfiles
 Dotfile Configurations
 
-This repository contains my public dotfiles. It includes a `Makefile` for installation. By default, everyting is installed. If you only wanted certain parts, then run `make` and the name of the part you want.
+This repository contains my public dotfiles. It includes a `Makefile` for installation. By default, everything is installed. If you only wanted certain parts, then run `make` and the name of the part you want.
+
+## installer
+The following command will install everything, backing up existing configs first:  
+`bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install) --install all`
 
 ## screenshots
 ### Vi
