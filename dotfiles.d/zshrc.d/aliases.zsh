@@ -1,3 +1,6 @@
+# Access to this dotfile installer
+alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install)"
+
 # Simple aliases
 alias chain="proxychains4 -q"
 alias please='sudo $(fc -ln -1)'
