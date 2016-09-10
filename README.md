@@ -8,6 +8,7 @@ To see what things look like, skip straight to [screenshots](#screenshots)!
 - [installing](#installing)
 - [uninstalling](#uninstalling)
 - [updating](#updating)
+- [backups](#backups)
 - [screenshots](#screenshots)
 - [whats included](#whats-included)
 - [extending](#extending)
@@ -40,6 +41,35 @@ Like what changed since you last installed? Just update your local install with:
 *Note:* When you update, symlinks will be re-created. Don't worry though, anything else you place in the `.dotfiles.d/*` folders will not be affected.
 
 ![dotfiles](screenshots/dotfiles_update.png)
+
+## backups
+During operation, the installer tries to create & restore backups where it deems it to be the right thing to do. Backups are located at:
+
+`~/.dotfiles.d/backups`
+
+ If multiple backups were needed, they will have a timestamp added as a suffix.
+
+ ```
+ ~ » ls -lah ~/.dotfiles.d/backups
+total 60K
+drwxrwxr-x 2 leon leon 4.0K Sep 10 17:37 .
+drwxrwxr-x 5 leon leon 4.0K Sep 10 15:20 ..
+-rw-rw-r-- 1 leon leon 2.7K Sep 10 15:59 .tmux.conf-1473515958
+-rw-rw-r-- 1 leon leon    5 Sep 10 16:04 .tmux.conf-1473515984
+-rw-rw-r-- 1 leon leon    5 Sep 10 16:04 .tmux.conf-1473516269
+-rw-rw-r-- 1 leon leon    5 Sep 10 16:04 .tmux.conf-1473516288
+-rw-rw-r-- 1 leon leon    5 Sep 10 16:55 .tmux.conf-1473519343
+-rw-rw-r-- 1 leon leon  329 Sep 10 15:59 .vimrc-1473515958
+-rw-rw-r-- 1 leon leon  329 Sep 10 15:59 .vimrc-1473515979
+-rw-rw-r-- 1 leon leon  329 Sep 10 16:04 .vimrc-1473516288
+-rw-rw-r-- 1 leon leon 1.1K Sep 10 15:58 .zshrc-1473515886
+-rw-rw-r-- 1 leon leon 1.1K Sep 10 15:58 .zshrc-1473515914
+-rw-rw-r-- 1 leon leon 1.1K Sep 10 15:59 .zshrc-1473515958
+-rw-rw-r-- 1 leon leon 1.1K Sep 10 16:04 .zshrc-1473516288
+-rw-r--r-- 1 leon leon 2.9K Sep 10 16:12 .zshrc-1473516754
+ ```
+
+ When a restore occurs, it will pick the newest one. Of course you can override that by replacing a config files with a specific version found in the backup directory.
 
 ## screenshots
 ### Vi
