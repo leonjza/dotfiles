@@ -18,7 +18,7 @@ set -e
 # static variables
 gitpath="$HOME/.dotfiles"
 gitorigin="https://github.com/leonjza/dotfiles.git"
-debug=true
+debug=false
 
 # configurations this script knows how to setup
 declare -a configurations=("all" "none" "zsh" "vim" "tmux")
@@ -55,22 +55,21 @@ function usage() {
     Dotfiles installer/updater
         2016 @leonjza
 
-    Usage: install [argument] [option]
+    Usage: install [option] [configs]
 
-    Examples (install)
-        install --i all
-        install --install
+    Examples
         install --install all
         install --install vim
-
-    Examples (remove):
-        install -r all
         install --remove all
         install --remove vim
+        install --update all
 
-    Examples (update):
-        install -u
-        install --update
+    Options:
+        -i, --install [configs]     Install configurations
+            Valid configurations: all none zsh vim tmux
+        -r, --remove [configs]      Uninstall configurations
+            Valid configurations: all none zsh vim tmux
+        -u, --update all            Update the configuration repository
 EOF
 
 }
@@ -121,7 +120,7 @@ function prepare_git() {
 
     fi
 
-	popd
+    popd
 
     echo_green "Git repository at $gitpath looks OK"
 
@@ -161,18 +160,18 @@ function install_components() {
         ;;
         all)
             install_zsh
-			install_vim
-			install_tmux
+            install_vim
+            install_tmux
         ;;
-		zsh)
-			install_zsh
-		;;
-		vim)
-			install_vim
-		;;
-		tmux)
-			install_tmux
-		;;
+        zsh)
+            install_zsh
+        ;;
+        vim)
+            install_vim
+        ;;
+        tmux)
+            install_tmux
+        ;;
     esac
 
 }
@@ -228,7 +227,7 @@ function install_zsh() {
     echo_debug "Symlinking $gitpath/zshrc to $zsh_rc"
     ln -s $gitpath/zshrc $zsh_rc
 
-	echo_green "ZSH config install complete!"
+    echo_green "ZSH config install complete!"
 
 }
 
@@ -242,24 +241,24 @@ function install_vim() {
         return
     fi
 
-	echo_debug "Preparing the vim plugin directory at $vim_plugin_dir"
-	mkdir -p $vim_plugin_dir
+    echo_debug "Preparing the vim plugin directory at $vim_plugin_dir"
+    mkdir -p $vim_plugin_dir
 
-	echo_green "Installing Vim Plugins"
+    echo_green "Installing Vim Plugins"
 
-	# Vundle
-	if [[ ! -d "$vim_plugin_dir/bundle/Vundle.vim" ]]; then
-		git clone https://github.com/gmarik/Vundle.vim $vim_plugin_dir/bundle/Vundle.vim
-	else
-		echo_yellow "Vundle already exists."
-	fi
+    # Vundle
+    if [[ ! -d "$vim_plugin_dir/bundle/Vundle.vim" ]]; then
+        git clone https://github.com/gmarik/Vundle.vim $vim_plugin_dir/bundle/Vundle.vim
+    else
+        echo_yellow "Vundle already exists."
+    fi
 
-	# Molokai
-	if [[ ! -d "$vim_plugin_dir/bundle/molokai" ]]; then
-		git clone https://github.com/tomasr/molokai $vim_plugin_dir/bundle/molokai
-	else
-		echo_yellow "Molokai color scheme already exists."
-	fi
+    # Molokai
+    if [[ ! -d "$vim_plugin_dir/bundle/molokai" ]]; then
+        git clone https://github.com/tomasr/molokai $vim_plugin_dir/bundle/molokai
+    else
+        echo_yellow "Molokai color scheme already exists."
+    fi
 
     echo_green "Installing configuration file"
 
@@ -271,10 +270,10 @@ function install_vim() {
     echo_debug "Symlinking $gitpath/vimrc to $vim_rc"
     ln -s $gitpath/vimrc $vim_rc
 
-	echo_green "Running vim plugin installer"
-	vim +PluginInstall +qall
+    echo_green "Running vim plugin installer"
+    vim +PluginInstall +qall
 
-	echo_green "Vim config install complete!"
+    echo_green "Vim config install complete!"
 
 }
 
@@ -298,7 +297,7 @@ function install_tmux() {
     echo_debug "Symlinking $gitpath/tmux.conf to $tmux_conf"
     ln -s $gitpath/tmux.conf $tmux_conf
 
-	echo_green "Tmux config install complete!"
+    echo_green "Tmux config install complete!"
 }
 
 function uninstall_components() {
@@ -328,12 +327,12 @@ function uninstall_components() {
             rm -f $tmux_conf
             rm -Rf $gitpath
         ;;
-		vim)
-			echo_green "Uninstalling Vim configuration"
+        vim)
+            echo_green "Uninstalling Vim configuration"
             rm -Rf $vim_plugin_dir
             rm -f $vim_rc
-			#TODO Restore backed up rc file
-		;;
+            #TODO Restore backed up rc file
+        ;;
     esac
 
 }
