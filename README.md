@@ -69,26 +69,54 @@ These dotfiles contain a number of maybe surprising things! Lets take a quick lo
 | `locate` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to make `mdfind` behave like `locate` on macOS |
 | `extract` | zsh plugin | [view](https://github.com/leonjza/dotfiles/blob/master/rc/zshrc) | *Very* convenient alias plugin that lets you extract almost any archive with `extract something.tar.gz` |
 
-Apart from the commands, there is also support for:
+Apart from the commands, there are also things like:
 
-- `git` command auto completion as well as visual indicators of current working branch and if your local branch has uncommitted changes.
+- A clean shell prompt. Shows current path and git branch of applicable.
+- `git` command auto completion as well as visual indicators of your current working branch and if your local branch has uncommitted changes.
+
+![git autocomple](screenshots/git_autocompelte.png)
+
 - Shell syntax highlighting. Green text means the command exists, red means it doesn't.
+
+![zsh syntax](screenshots/zsh_syntax.png)
+
 - Shell command autocomplete based off command history. Type that long command, see a grey suggested area of the last, similar command in your history and hit the right arrow key to complete it.
+
+![zsh autocompelte](screenshots/zsh_autocomplete.png)
+
 - Colored man pages. I need not say more.
+
+![color man](screenshots/colorman.png)
 
 ### vim
 - A theme that is really easy on the eye, imo anyways.
 - A sexy syntax checker that will let you know as you save the file where a line of code may cause syntax/parsing errors.
+
+![vim syntax](screenshots/vim_syntax.png)
+
+- A sexy 'powerline' that can give you status updates, like something about that syntax error you have.
+
+![vim syntax](screenshots/vim_syntax2.png)
+
 - An git-like indicator showing which lines of code have changed / been added & removed based on the current git repository.
+
+![vim git](screenshots/vimgit.png)
+
 - A few other **sane** defaults. Well, sane for me anyways ;)
 
 ## extending
 The layout of this project is mostly driven by a few core ideas:
 - It should be easy to update, no matter what the added config of the install.
 - It should be easy to extend the dotfiles and add environment specific files/changes.
+- Base rc files should set some required defaults, and then source all other configs from `*.d` style directories.
 - It should look good! :)
 
-With that in mind, if you wanted to extend any of the existing configurations, I'd suggest you go and have a look at your local installs `~/.dotfiles.d/` directory and locate the software you want to edit. In the case of `zsh`, it will be `~/.dotfiles.d/zshrc.d/`. In here, you can add any file ending in `.zsh` and it will be included on startup.
+With that in mind, if you wanted to extend any of the existing configurations, I'd suggest you go and have a look at your local installs `~/.dotfiles.d/` directory and locate the software you want to edit. In the case of `zsh`, it will be `~/.dotfiles.d/zshrc.d/`. In here, you can add any file ending in `.zsh` and it will be included on startup.  
+**Dont edit the `.zshrc` file directly, its just a symlink to the dotfiles github repo**
+
+I generally just create a file called `local.zsh` in `~/.dotfiles.d/zshrc.d/` with my local overrides and other stuff I need.
+
+![vim git](screenshots/zsh_local.png)
 
 Files added to the `*.d` type folders will remain there, even after upgrades and removals. So, keep that in mind!
 
