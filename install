@@ -334,6 +334,8 @@ function uninstall_components() {
             rm -f $vim_rc
             rm -f $tmux_conf
             rm -Rf $gitpath
+
+            echo_warning "User confirgurations in $HOME/.dotfiles.d have been left behind"
         ;;
         vim)
             echo_yellow "Uninstalling Vim configuration"
@@ -353,6 +355,13 @@ function update_repo() {
     pushd $gitpath
     git pull
     popd
+
+    echo "Updating symlinks"
+
+    if [[ -d "$HOME/.dotfiles.d/zshrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d; fi
+    if [[ -d "$HOME/.dotfiles.d/vimrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/vimrc.d/* $HOME/.dotfiles.d/vimrc.d; fi
+
+    echo_green "Update complete. You may want to close/re-open your session for changes to take effect."
 }
 
 # start by checking the software needed by this installer
