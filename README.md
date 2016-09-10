@@ -59,7 +59,7 @@ These dotfiles contain a number of maybe surprising things! Lets take a quick lo
 
 ### zsh
 | Command        | Type           | Source  | Description |
-| ------------- |:-------------:| -----:|
+| ------------- |:-------------:|:------:| ------------|
 | `dotfiles`      | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience command to the `dotfiles` installer |
 | `chain`      | alias      | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to `proxychains` |
 | `please` | alias  | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Run the last command again as root |
