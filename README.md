@@ -16,6 +16,7 @@ To see what things look like, skip straight to [screenshots](#screenshots)!
 
 ### other
 - [sublime text](#sublime-text-install)
+- [jetbrains](#jetbrains)
 
 ## installing
 The following command will install everything, backing up existing configs first and make available a new `dotfiles` command:
@@ -80,7 +81,13 @@ Editing a python source file.
 ![vim](screenshots/vim.png "Vi")
 ### Sublime Text
 Editing a PHP source file.
-![ZSH](screenshots/sublime.png "ZSH Shell")
+![ZSH](screenshots/sublime.png "Sublime Text")
+### PyCharm
+Editing Python in PyCharm 2016.2
+![ZSH](screenshots/pycharm.png "PyCharm")
+### PhpStorm
+Editing PHP PhpStorm 2016.2
+![ZSH](screenshots/phpstorm.png "PyCharm")
 ### Zsh
 Shell history completion.
 ![ZSH](screenshots/shell.png "ZSH Shell")
@@ -170,3 +177,6 @@ You should probably also set this in your terminal emulator (iTerm2 in my case) 
 
 ### sublime text install
 For the sublime text installation process, please refer to the [README](https://github.com/leonjza/dotfiles/tree/master/SublimeText).
+
+### jetbrains
+Jetbrains editors allow the import/export of settings via the IDE's themselves. The [jetbrains](https://github.com/leonjza/dotfiles/tree/master/jetbrains) folder contains the *Look & Feel* settings that can be imported.
