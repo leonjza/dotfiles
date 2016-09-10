@@ -38,10 +38,11 @@ tmux_conf="$HOME/.tmux.conf"
 
 # helper functions
 # colors!
-function echo_green() { echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
-function echo_red() { echo -e "$(tput setaf 1)$*$(tput sgr0)"; }
-function echo_yellow() { echo -e "$(tput setaf 3)$*$(tput sgr0)"; }
-function echo_debug() { if [ "$debug" = true ]; then echo -e "$(tput setaf 3; tput bold)>>> $*$(tput sgr0)"; fi }
+function echo() { command echo -e " * $*"; }
+function echo_green() { command echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
+function echo_red() { command echo -e "$(tput setaf 1)$*$(tput sgr0)"; }
+function echo_yellow() { command echo -e "$(tput setaf 3)$*$(tput sgr0)"; }
+function echo_debug() { if [ "$debug" = true ]; then command echo -e "$(tput setaf 3; tput bold)>>> $*$(tput sgr0)"; fi }
 # directories!
 function pushd() { command pushd "$@" > /dev/null; }
 function popd() { command popd "$@" > /dev/null; }
@@ -96,14 +97,14 @@ function prepare_git() {
     fi
 
     # some more work is needed to to see if the repo is sane
-    echo_debug "$gitpath exists, inspecting it"
+    echo_debug "$gitpath exists, inspecting it."
     pushd $gitpath
 
     # check if we are inside a valid git repository
     valid_repo=$(set +e; git rev-parse --is-inside-work-tree 2>/dev/null; set -e)
     if [[ ! "$valid_repo" = true ]]; then
 
-        echo_red "$gitpath is a directory, but not a valid git repository. Move/delete it to continue"
+        echo_red "$gitpath is a directory, but not a valid git repository. Move/delete it to continue."
         exit 1
 
     fi
@@ -133,7 +134,7 @@ function validate_configuration() {
     for element in "${configurations[@]}"; do
 
         if [[ "$element" == "$seeking" ]]; then
-            echo_green "Configuration '$seeking' looks OK"
+            echo "Configuration '$seeking' looks OK"
             return
         fi
 
@@ -155,7 +156,7 @@ function install_components() {
 
     case $install_target in
         none)
-            echo_green "Installing nothing..."
+            echo_yellow "Installing nothing..."
             return
         ;;
         all)
@@ -187,20 +188,20 @@ function install_zsh() {
         return
     fi
 
-    echo_green "Downloading oh-my-zsh installer"
+    echo "Downloading oh-my-zsh installer"
     echo_debug "Saving installer to $temp"
     curl "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" $temp
 
     echo_debug "Preventing the installer from starting ZSH when its done"
     sed -i -r "s/env zsh//" $temp
 
-    echo_green "Running oh-my-zsh installer..."
+    echo "Running oh-my-zsh installer..."
     echo_debug "Using sh to run $temp"
     sh $temp
     echo_debug "Removing downloaded installer"
     rm -f $temp
 
-    echo_green "Installing plugins"
+    echo "Installing plugins"
     echo_debug "Using oh-my-zsh directory: $oh_my_zsh/custom/plugins"
 
     # Syntax highlighting
@@ -217,7 +218,7 @@ function install_zsh() {
         echo_yellow "Autosuggestions plugin already exists."
     fi
 
-    echo_green "Installing configuration file"
+    echo "Installing Zsh configuration file"
 
     if [[ -f "$zsh_rc" ]]; then
         echo_yellow "Backing up existing zshrc to $HOME/zshrc.backup"
@@ -244,7 +245,7 @@ function install_vim() {
     echo_debug "Preparing the vim plugin directory at $vim_plugin_dir"
     mkdir -p $vim_plugin_dir
 
-    echo_green "Installing Vim Plugins"
+    echo "Installing Vim Plugins"
 
     # Vundle
     if [[ ! -d "$vim_plugin_dir/bundle/Vundle.vim" ]]; then
@@ -260,7 +261,7 @@ function install_vim() {
         echo_yellow "Molokai color scheme already exists."
     fi
 
-    echo_green "Installing configuration file"
+    echo "Installing Vim configuration file"
 
     if [[ -f "$vim_rc" ]]; then
         echo_yellow "Backing up existing vimrc to $HOME/vimrc.backup"
@@ -270,7 +271,7 @@ function install_vim() {
     echo_debug "Symlinking $gitpath/vimrc to $vim_rc"
     ln -s $gitpath/vimrc $vim_rc
 
-    echo_green "Running vim plugin installer"
+    echo "Running vim plugin installer"
     vim +PluginInstall +qall
 
     echo_green "Vim config install complete!"
@@ -287,7 +288,7 @@ function install_tmux() {
         return
     fi
 
-    echo_green "Installing configuration file"
+    echo "Installing Tmux configuration file"
 
     if [[ -f "$tmux_conf" ]]; then
         echo_yellow "Backing up existing tmuxconf to $HOME/tmuxconf.backup"
@@ -310,11 +311,11 @@ function uninstall_components() {
 
     case $uninstall_target in
         none)
-            echo_green "Uninstalling nothing..."
+            echo_yellow "Uninstalling nothing..."
             return
         ;;
         all)
-            echo_green "Uninstalling everything"
+            echo_yellow "Uninstalling everything"
 
             # restore the shell back to bash
             echo_yellow "Changing your shell back to bash!"
@@ -328,7 +329,7 @@ function uninstall_components() {
             rm -Rf $gitpath
         ;;
         vim)
-            echo_green "Uninstalling Vim configuration"
+            echo_yellow "Uninstalling Vim configuration"
             rm -Rf $vim_plugin_dir
             rm -f $vim_rc
             #TODO Restore backed up rc file
@@ -396,16 +397,16 @@ fi
 
 # install
 if [[ ! "$install_target" = "no" ]]; then
-    echo_green "Running install on: $install_target"
+    echo "Running install on: $install_target"
     install_components
 fi
 
 if [[ ! "$uninstall_target" = "no" ]]; then
-    echo_green "Running uninstall on: $uninstall_target"
+    echo "Running uninstall on: $uninstall_target"
     uninstall_components
 fi
 
 if [[ "$update" = true ]]; then
-    echo_green "Running repo update"
+    echo "Running repo update"
     update_repo
 fi
