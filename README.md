@@ -14,10 +14,13 @@ To see what things look like, skip straight to [screenshots](#screenshots)!
 - [errors](#errors)
 
 ## installing
-The following command will install everything, backing up existing configs first and make available a new `dotfiles` command:  
+The following command will install everything, backing up existing configs first and make available a new `dotfiles` command:
+
 `bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install) --install all`
 
 After installation, a new `dotfiles` command will be come available that will do exactly the same as the above command. In fact, its just an [alias](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh#L2).
+
+![dotfiles](screenshots/dotfiles.png)
 
 ## uninstalling
 If for any reason you just cant get to like these configurations, removing them should be as easy as:
@@ -27,13 +30,7 @@ _If you no longer can access the `dotfiles` command, substitute it with the `bas
 
 You can also remove only certain parts of the configs. For example, to remove `tmux` configurations simply run `dotfiles --remove tmux`:
 
-```
-~ » dotfiles --remove tmux
- * Running uninstall on: tmux
- * Configuration 'tmux' looks OK
- * Attempting to restore a backup tmux.conf if it exists
-Restoring last backup of .tmux.conf to /home/leon/.tmux.conf which is .tmux.conf-1473516288
-```
+![dotfiles](screenshots/tmux_remove.png)
 
 ## updating
 Like what changed since you last installed? Just update your local install with:
@@ -41,6 +38,8 @@ Like what changed since you last installed? Just update your local install with:
 `dotfiles --update all`
 
 *Note:* When you update, symlinks will be re-created. Don't worry though, anything else you place in the `.dotfiles.d/*` folders will not be affected.
+
+![dotfiles](screenshots/dotfiles_update.png)
 
 ## screenshots
 ### Vi
@@ -112,7 +111,8 @@ The layout of this project is mostly driven by a few core ideas:
 - It should look good! :)
 
 With that in mind, if you wanted to extend any of the existing configurations, I'd suggest you go and have a look at your local installs `~/.dotfiles.d/` directory and locate the software you want to edit. In the case of `zsh`, it will be `~/.dotfiles.d/zshrc.d/`. In here, you can add any file ending in `.zsh` and it will be included on startup.  
-**Dont edit the `.zshrc` file directly, its just a symlink to the dotfiles github repo**
+
+**Dont edit the `.zshrc` file directly, its just a symlink to the dotfiles github repo! Use a `.d` style file.**
 
 I generally just create a file called `local.zsh` in `~/.dotfiles.d/zshrc.d/` with my local overrides and other stuff I need.
 
