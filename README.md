@@ -1,4 +1,4 @@
-# ⚡️.dotfiles | batteries included dotfiles configurations
+# ⚡️.dotfiles | batteries included dotfile configurations
 This repository contains my public dotfiles. It comes with a single installer that will take care of installing, updating and backing up your existing configurations.
 
 To see what things look like, skip straight to [screenshots](#screenshots)!
