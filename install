@@ -431,60 +431,6 @@ function update_repo() {
     echo_green "Update complete. You may want to close/re-open your session for changes to take effect."
 }
 
-function main() {
-
-    # parse commandline arguments
-    if [[ $# -gt 1 ]]; then
-
-        while [[ $# -gt 1 ]]; do
-            case $1 in
-            -i|--install)
-            install_target="$2"
-            shift # past argument
-            ;;
-            -r|--remove)
-            uninstall_target="$2"
-            shift # past argument
-            ;;
-            -u|--update)
-            update=true
-            shift # past argument
-            ;;
-            *)
-            showusage="yes"
-            ;;
-        esac
-
-        shift # past argument or value
-        done
-    else
-        echo_debug "Running usage(), no args -gt 1 found"
-        usage
-    fi
-
-    # usage
-    if [ "$showusage" = "yes" ]; then
-        usage
-        exit 2
-    fi
-
-    # install
-    if [[ ! "$install_target" = "no" ]]; then
-        echo "Running install on: $install_target"
-        install_components
-    fi
-
-    if [[ ! "$uninstall_target" = "no" ]]; then
-        echo "Running uninstall on: $uninstall_target"
-        uninstall_components
-    fi
-
-    if [[ "$update" = true ]]; then
-        echo "Running repo update"
-        update_repo
-    fi
-}
-
 # start by checking the software needed by this installer
 # if we cant find it, rather die
 for cmd in "curl" "git"; do
@@ -497,4 +443,53 @@ for cmd in "curl" "git"; do
 
 done
 
-main
+# parse commandline arguments
+if [[ $# -gt 1 ]]; then
+
+    while [[ $# -gt 1 ]]; do
+        case $1 in
+        -i|--install)
+        install_target="$2"
+        shift # past argument
+        ;;
+        -r|--remove)
+        uninstall_target="$2"
+        shift # past argument
+        ;;
+        -u|--update)
+        update=true
+        shift # past argument
+        ;;
+        *)
+        showusage="yes"
+        ;;
+    esac
+
+    shift # past argument or value
+    done
+else
+    echo_debug "Running usage(), no args -gt 1 found"
+    usage
+fi
+
+# usage
+if [ "$showusage" = "yes" ]; then
+    usage
+    exit 2
+fi
+
+# install
+if [[ ! "$install_target" = "no" ]]; then
+    echo "Running install on: $install_target"
+    install_components
+fi
+
+if [[ ! "$uninstall_target" = "no" ]]; then
+    echo "Running uninstall on: $uninstall_target"
+    uninstall_components
+fi
+
+if [[ "$update" = true ]]; then
+    echo "Running repo update"
+    update_repo
+fi
