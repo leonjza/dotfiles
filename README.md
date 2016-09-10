@@ -15,7 +15,7 @@ To see what things look like, skip straight to [screenshots](#screenshots)!
 - [errors](#errors)
 
 ### other
-- [sublime tex](#sublime-text)
+- [sublime text](#sublime-text-install)
 
 ## installing
 The following command will install everything, backing up existing configs first and make available a new `dotfiles` command:
@@ -168,5 +168,5 @@ You should probably also set this in your terminal emulator (iTerm2 in my case) 
 
 ## other
 
-### sublime text
+### sublime text install
 For the sublime text installation process, please refer to the [README](https://github.com/leonjza/dotfiles/tree/master/SublimeText).
