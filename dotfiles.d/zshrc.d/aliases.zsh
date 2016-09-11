@@ -7,12 +7,17 @@ alias please='sudo $(fc -ln -1)'
 alias p="passpie"
 alias nah="git reset --hard;git clean -df"
 
+# Alias Sublime Text 3 if installed on macOS
+if [[ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
+    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+fi
+
 # Alias ports to lsof for tcp connections
 if hash lsof 2>/dev/null; then
     alias ports='sudo lsof -iTCP -sTCP:LISTEN -P'
 fi
 
-# Alias locate on OSX to Spotlights mdfind -name
+# Alias locate on macOS to Spotlights mdfind -name
 if hash mdfind 2>/dev/null; then
     alias locate="mdfind -name"
 fi
