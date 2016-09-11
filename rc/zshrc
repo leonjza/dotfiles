@@ -25,6 +25,12 @@ source $ZSH/oh-my-zsh.sh
 # Clear the RPROMPT
 RPROMPT=""
 
+# Adding your own configurations should be done by adding files
+# to the following directory:
+#   ~/.dotfiles.d/zshrc.d/
+#
+# The filename should end .zsh to be loaded correctly!
+
 # Load all *.zsh files from ~/.dotfiles.d/zshrc.d directory
 if [ -d $HOME/.dotfiles.d/zshrc.d ]; then
 
