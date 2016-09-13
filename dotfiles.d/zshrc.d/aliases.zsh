@@ -1,3 +1,9 @@
+# Command Aliases
+#
+# Generally, any commands that start with `alias` should live here.
+# Checks can be done to see if a command exists before building
+# the alias.
+
 # Access to this dotfile installer
 alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install)"
 
