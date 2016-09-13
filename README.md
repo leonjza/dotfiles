@@ -87,13 +87,16 @@ Editing Python in PyCharm 2016.2
 ![ZSH](screenshots/pycharm.png "PyCharm")
 ### PhpStorm
 Editing PHP PhpStorm 2016.2
-![ZSH](screenshots/phpstorm.png "PyCharm")
+![ZSH](screenshots/phpstorm.png "PhpStorm")
+### gdb
+Debugging a test program with gdb & peda.
+![gdb](screenshots/gdb.png "gdb")
 ### Zsh
 Shell history completion.
 ![ZSH](screenshots/shell.png "ZSH Shell")
 
 ## whats included
-
+Configurations for `zsh`, `vim`, `tmux` and `gdb`!  
 These dotfiles contain a number of maybe surprising things! Lets take a quick look.
 
 ### zsh
