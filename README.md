@@ -108,7 +108,7 @@ These dotfiles contain a number of maybe surprising things! Lets take a quick lo
 | `ports` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to view open ports on macOS |
 | `locate` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to make `mdfind` behave like `locate` on macOS |
 | `extract` | zsh plugin | [view](https://github.com/leonjza/dotfiles/blob/master/rc/zshrc) | *Very* convenient alias plugin that lets you extract almost any archive with `extract something.tar.gz` |
-| `filetyoes` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | List files in a directory as well as their types according to `file` |
+| `filetypes` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | List files in a directory as well as their types according to `file` |
 
 Apart from the commands, there are also things like:
 
