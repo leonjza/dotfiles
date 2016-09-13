@@ -21,7 +21,7 @@ gitorigin="https://github.com/leonjza/dotfiles.git"
 debug=false
 
 # configurations this script knows how to setup
-declare -a configurations=("all" "none" "zsh" "vim" "tmux")
+declare -a configurations=("all" "none" "zsh" "vim" "tmux" "gdb")
 
 # defaults for commandline options
 install_target="no"
@@ -35,6 +35,7 @@ zsh_rc="$HOME/.zshrc"
 vim_plugin_dir="$HOME/.vim"
 vim_rc="$HOME/.vimrc"
 tmux_conf="$HOME/.tmux.conf"
+gdb_init="$HOME/.gdbinit"
 rc_backup_dir="$HOME/.dotfiles.d/backups"
 
 # helper functions
@@ -59,7 +60,7 @@ function usage() {
 
     Usage: install [option] [configs]
 
-    Examples
+    Examples:
         install --install all
         install --install vim
         install --remove all
@@ -67,11 +68,12 @@ function usage() {
         install --update all
 
     Options:
-        -i, --install [configs]     Install configurations
-            Valid configurations: all none zsh vim tmux
-        -r, --remove [configs]      Uninstall configurations
-            Valid configurations: all none zsh vim tmux
+        -i, --install [configs]     Install configurations (See Valid Configs)
+        -r, --remove [configs]      Uninstall configurations (See Valid Configs)
         -u, --update all            Update the configuration repository
+
+    Valid Configs:
+        ${configurations[@]}
 EOF
 
 }
@@ -200,6 +202,7 @@ function install_components() {
             install_zsh
             install_vim
             install_tmux
+            install_gdb
         ;;
         zsh)
             install_zsh
@@ -209,6 +212,9 @@ function install_components() {
         ;;
         tmux)
             install_tmux
+        ;;
+        gdb)
+            install_gdb
         ;;
     esac
 
@@ -352,6 +358,51 @@ function install_tmux() {
     echo_green "Tmux config install complete!"
 }
 
+function install_gdb() {
+
+    local pedaorigin="https://github.com/longld/peda.git"
+    local peda_home="$HOME/.peda"
+
+    echo_green "Installing Gdb configuration"
+
+    # make sure gdb is available
+    if ! hash gdb 2>/dev/null; then
+        echo_red "gdb is not installed or in your PATH. Not installing this configuration."
+        return
+    fi
+
+    echo "Installing Gdb configuration"
+
+    ## Backup the current one
+    if [[ -f "$gdb_init" ]]; then
+        backup_config $gdb_init
+    fi
+
+    echo "Cloning & Installing Peda from $pedaorigin"
+    if [[ ! -d $peda_home ]]; then
+
+        echo_debug "Running git clone $pedaorigin $peda_home"
+        git clone $pedaorigin $peda_home
+
+    else
+
+        echo_yellow "Peda appears to already be installed"
+
+        # Check that it actually *is* peda.
+        if [[ ! -f $peda_home/peda.py ]]; then
+            echo_red "The directory $peda_home already exists, but does not look like Peda from $pedaorigin. Backing out."
+            return
+        fi
+
+    fi
+
+    echo_debug "Adding source to .gdbinit"
+    command echo "source $peda_home/peda.py" > $gdb_init
+
+    echo_green "Gdb config install complete!"
+
+}
+
 function uninstall_components() {
 
     # check that the uninstall target is something we know if
@@ -386,6 +437,11 @@ function uninstall_components() {
             echo "Attempting to restore a backup tmux.conf if it exists"
             restore_config $tmux_conf
 
+            rm -f $gdb_init
+            rm -Rf $peda_home
+            echo "Attempting to restore a backup gdbinit if it exists"
+            restore_config $gdb_init
+
             echo_red "Removing source dotfiles repository $gitpath"
             rm -Rf $gitpath
 
@@ -411,6 +467,12 @@ function uninstall_components() {
             rm -f $tmux_conf
             echo "Attempting to restore a backup tmux.conf if it exists"
             restore_config $tmux_conf
+        ;;
+        gdb)
+            rm -f $gdb_init
+            rm -Rf $peda_home
+            echo "Attempting to restore a backup gdbinit if it exists"
+            restore_config $gdb_init
         ;;
     esac
 
