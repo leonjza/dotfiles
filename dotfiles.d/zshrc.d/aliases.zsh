@@ -54,6 +54,6 @@ if hash proxychains 2>/dev/null || hash proxychains4 2>/dev/null; then
 fi
 
 # Alias passpie password manager. Install with: brew install passpie
-if hash passpipe 2>/dev/null; then
+if hash passpie 2>/dev/null; then
     alias p="passpie"
 fi
