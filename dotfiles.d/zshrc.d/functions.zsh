@@ -21,3 +21,29 @@ function filetypes() {
 
     find . -maxdepth 1 -print0 | xargs -0 file -k | grep -v directory
 }
+
+# Encode a URL
+function urlencode() {
+
+    local url=$1
+
+    if [[ $url == "" ]]; then
+        echo "A string is needed to encode"
+        return
+    fi
+
+    python -c "import urllib as u; print(u.quote_plus('$url'));"
+}
+
+# Decode a string that may have been URL encoded
+function urldecode() {
+
+    local string=$1
+
+    if [[ $string == "" ]]; then
+        echo "A string is needed to decode"
+        return
+    fi
+
+    python -c "import urllib as u; print(u.unquote_plus('$string'));"
+}

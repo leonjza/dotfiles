@@ -57,3 +57,12 @@ fi
 if hash passpie 2>/dev/null; then
     alias p="passpie"
 fi
+
+# Alias httpie & method to just the method
+if hash http 2>/dev/null; then
+
+    for method in get post put delete; do
+        alias $method="http $method"
+    done
+
+fi
