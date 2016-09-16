@@ -47,3 +47,19 @@ function urldecode() {
 
     python -c "import urllib as u; print(u.unquote_plus('$string'));"
 }
+
+# Print json string in a pretty formatted way
+function json() {
+
+	# Input is an argument
+    if [[ -t 0 ]]; then
+
+        python -mjson.tool <<< "$*"
+        return
+
+    fi
+
+    # Input is a pipe
+    python -mjson.tool
+
+}

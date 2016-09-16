@@ -66,3 +66,10 @@ if hash http 2>/dev/null; then
     done
 
 fi
+
+# Python2 Tools
+if hash python2 2>/dev/null; then
+
+    alias httpserver="python2 -m SimpleHTTPServer 0"
+
+fi
