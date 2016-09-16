@@ -24,10 +24,10 @@ debug=false
 declare -a configurations=("all" "none" "zsh" "vim" "tmux" "gdb")
 
 # defaults for commandline options
-install_target="no"
-uninstall_target="no"
+install_target=false
+uninstall_target=false
 update=false
-showusage="no"
+showusage=false
 
 # defaults for file & config locations
 oh_my_zsh="$HOME/.oh-my-zsh"
@@ -66,6 +66,7 @@ function usage() {
         install --remove all
         install --remove vim
         install --update all
+        install --check all
 
     Options:
         -i, --install [configs]     Install configurations (See Valid Configs)
@@ -525,7 +526,7 @@ if [[ $# -gt 1 ]]; then
         shift # past argument
         ;;
         *)
-        showusage="yes"
+        showusage=true
         ;;
     esac
 
@@ -537,18 +538,18 @@ else
 fi
 
 # usage
-if [ "$showusage" = "yes" ]; then
+if [ "$showusage" = true ]; then
     usage
     exit 2
 fi
 
 # install
-if [[ ! "$install_target" = "no" ]]; then
+if [[ ! "$install_target" = false ]]; then
     echo "Running install on: $install_target"
     install_components
 fi
 
-if [[ ! "$uninstall_target" = "no" ]]; then
+if [[ ! "$uninstall_target" = false ]]; then
     echo "Running uninstall on: $uninstall_target"
     uninstall_components
 fi
