@@ -8,7 +8,7 @@ user_dir="$sublime_dir/Packages/User"
 
 if [[ ! "$(uname)" == "Darwin" ]]; then
 
-    echo "This can only run on OSX. Sorry!"
+    echo "This can only run on macOS. Sorry!"
     exit 1
 fi
 

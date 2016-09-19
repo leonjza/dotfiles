@@ -11,7 +11,7 @@ alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotf
 # Please do the last command as sudo
 alias please='sudo $(fc -ln -1)'
 
-# Alias Screensaver on osx as afk. My Mac locks when it starts.
+# Alias Screensaver on macOS as afk. My Mac locks when it starts.
 if [[ -f "/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine" ]]; then
     alias afk="open -a ScreenSaverEngine"
 fi
