@@ -8,8 +8,12 @@
 
 # Access to this dotfile installer
 alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install)"
+
 # Please do the last command as sudo
-alias please='sudo $(fc -ln -1)'
+alias please="sudo $(fc -ln -1)"
+
+# Kill jobs in the current session
+alias killjobs="echo $(jobs -p | awk '{ print $3 }') | xargs -t kill -9"
 
 # Alias Screensaver on macOS as afk. My Mac locks when it starts.
 if [[ -f "/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine" ]]; then
@@ -23,7 +27,7 @@ fi
 
 # Alias ports to lsof for tcp connections
 if hash lsof 2>/dev/null; then
-    alias ports='sudo lsof -iTCP -sTCP:LISTEN -P'
+    alias ports="sudo lsof -iTCP -sTCP:LISTEN -P"
 fi
 
 # Alias locate on macOS to Spotlights mdfind -name
