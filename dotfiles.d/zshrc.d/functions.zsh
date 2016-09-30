@@ -63,3 +63,51 @@ function json() {
     python -mjson.tool
 
 }
+
+# Update the software from major package managers and the base OS
+function updatesoftware() {
+
+    # Upgrade Homebrew
+    if hash brew 2>/dev/null; then
+
+        echo " * Upgrading Homebrew"
+        brew upgrade
+
+        echo " * Cleaning old versions in Homebrew"
+        brew cleanup
+
+    fi
+
+    # Composer global libraries
+    if hash composer 2>/dev/null; then
+
+        echo " * Upgrading Composer global"
+        composer global update
+
+    fi
+
+    # Update Debian based OS
+    if hash apt-get 2>/dev/null; then
+
+        echo " * Updating OS via apt"
+        sudo apt-get update && sudo apt-get upgrade -y
+
+    fi
+
+    # Update Redhat based OS
+    if hash yum 2>/dev/null; then
+
+        echo " * Updating OS via yum"
+        sudo yum update -y
+
+    fi
+
+    # Update macOS based OS
+    if hash softwareupdate 2>/dev/null; then
+
+        echo "Updating macOS using softwareupdate"
+        sudo softwareupdate -i -a
+
+    fi
+
+}
