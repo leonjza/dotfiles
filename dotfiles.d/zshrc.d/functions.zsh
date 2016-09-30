@@ -105,7 +105,7 @@ function updatesoftware() {
     # Update macOS based OS
     if hash softwareupdate 2>/dev/null; then
 
-        echo "Updating macOS using softwareupdate"
+        echo " * Updating macOS using softwareupdate"
         sudo softwareupdate -i -a
 
     fi
