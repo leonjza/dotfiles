@@ -92,6 +92,9 @@ function updatesoftware() {
         echo " * Updating OS via apt"
         sudo apt-get update && sudo apt-get upgrade -y
 
+        echo " * Cleaning up packages"
+        sudo apt-get autoremove -y
+
     fi
 
     # Update Redhat based OS
