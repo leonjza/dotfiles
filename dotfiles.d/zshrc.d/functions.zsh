@@ -72,8 +72,10 @@ function updatesoftware() {
     if [[ -d $AUTO_SUGGEST ]]; then
 
         echo " * Updating auto suggestions plugin"
+        pushd .
         cd $AUTO_SUGGEST
         git pull
+        popd
 
     fi
 
@@ -81,8 +83,10 @@ function updatesoftware() {
     if [[ -d $SYNTAX_HIGHLIGHT ]]; then
 
         echo " * Updating syntax highlighting plugin"
+        pushd .
         cd $SYNTAX_HIGHLIGHT
         git pull
+        popd
 
     fi
 
