@@ -67,6 +67,25 @@ function json() {
 # Update the software from major package managers and the base OS
 function updatesoftware() {
 
+    # Update ZSH Plugins
+    AUTO_SUGGEST="$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    if [[ -d $AUTO_SUGGEST ]]; then
+
+        echo " * Updating auto suggestions plugin"
+        cd $AUTO_SUGGEST
+        git pull
+
+    fi
+
+    SYNTAX_HIGHLIGHT="$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    if [[ -d $SYNTAX_HIGHLIGHT ]]; then
+
+        echo " * Updating syntax highlighting plugin"
+        cd $SYNTAX_HIGHLIGHT
+        git pull
+
+    fi
+
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
 
