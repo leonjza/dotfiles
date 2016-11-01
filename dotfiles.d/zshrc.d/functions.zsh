@@ -104,6 +104,9 @@ function updatesoftware() {
     # Composer global libraries
     if hash composer 2>/dev/null; then
 
+        echo " * Updating composer itself"
+        composer self-update
+
         echo " * Upgrading Composer global"
         composer global update
 
