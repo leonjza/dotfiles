@@ -128,12 +128,22 @@ function updatesoftware() {
 
     fi
 
-    # Update macOS based OS
-    if hash softwareupdate 2>/dev/null; then
+    # Update macOS based OS. First try and use mas:
+    #   brew install mas
+    if hash mas 2>/dev/null; then
 
-        echo " * Updating macOS using softwareupdate"
-        sudo softwareupdate -i -a
+        echo " * Updating macOS using mas"
+        mas upgrade
 
+    else
+
+        # Fallback to softwareupdate
+        if hash softwareupdate 2>/dev/null; then
+
+            echo " * Updating macOS using softwareupdate"
+            sudo softwareupdate -i -a
+
+        fi
     fi
 
 }
