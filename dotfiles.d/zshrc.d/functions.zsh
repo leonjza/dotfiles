@@ -140,6 +140,7 @@ function updatesoftware() {
         # Fallback to softwareupdate
         if hash softwareupdate 2>/dev/null; then
 
+            echo " * 'mas' not installed. Falling back to softwareupdate"
             echo " * Updating macOS using softwareupdate"
             sudo softwareupdate -i -a
 
