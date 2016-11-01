@@ -72,10 +72,10 @@ function updatesoftware() {
     if [[ -d $AUTO_SUGGEST ]]; then
 
         echo " * Updating auto suggestions plugin"
-        pushd .
+        pushd . 2>1 /dev/null
         cd $AUTO_SUGGEST
         git pull
-        popd
+        popd 2>1 /dev/null
 
     fi
 
@@ -83,10 +83,10 @@ function updatesoftware() {
     if [[ -d $SYNTAX_HIGHLIGHT ]]; then
 
         echo " * Updating syntax highlighting plugin"
-        pushd .
+        pushd . 2>1 /dev/null
         cd $SYNTAX_HIGHLIGHT
         git pull
-        popd
+        popd 2>1 /dev/null
 
     fi
 
