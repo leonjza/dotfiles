@@ -400,6 +400,18 @@ function install_gdb() {
     echo_debug "Adding source to .gdbinit"
     command echo "source $peda_home/peda.py" > $gdb_init
 
+    ## Add extra gdbinit configuration if we are running Sierra
+    if hash sw_vers 2>/dev/null; then
+
+        echo_debug "macOS detected. Checking for version 10.12"
+
+        if [[ $(sw_vers -productVersion) == *"10.12"* ]]
+        then
+            echo_green "Adding 'startup-with-shell off' to gdbinit for macOS Sierra"
+            command echo "set startup-with-shell off" >> ~/.gdbinit
+        fi
+    fi
+
     echo_green "Gdb config install complete!"
 
 }
