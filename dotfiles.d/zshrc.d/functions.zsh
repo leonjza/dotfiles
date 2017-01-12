@@ -151,3 +151,21 @@ function updatesoftware() {
     fi
 
 }
+
+# gpg[de]crypt based on:
+#   https://github.com/SixArm/gpg-encrypt/blob/master/gpg-encrypt
+function gpgencrypt() {
+
+    local file=$1
+
+    gpg --symmetric --cipher-algo aes256 --digest-algo sha256 --cert-digest-algo sha256 -z 0 --compress-algo none --quiet --no-greeting "$file"
+}
+
+function gpgdecrypt() {
+
+    local file=$1
+
+    gpg --decrypt "$file" > "$file"decrypted
+
+    echo "Output saved to $file.decrypted"
+}
