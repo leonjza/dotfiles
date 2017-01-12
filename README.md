@@ -118,6 +118,7 @@ These dotfiles contain a number of maybe surprising things! Lets take a quick lo
 | `filetypes` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | List files in a directory as well as their types according to `file` |
 | `json` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Output a file in pretty formatted json |
 | `updatesoftware` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Update software in major package managers and OS |
+| `gpgencrypt` / `gpgdecrypt` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Encrypt / Decrypt files using GPG |
 
 Apart from the commands, there are also things like:
 
