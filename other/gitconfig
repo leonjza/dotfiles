@@ -1,0 +1,15 @@
+[user]
+	email = leonja511@gmail.com
+	name = Leon Jacobs
+	signingkey = AE1F25096C0CB06B
+
+[core]
+	editor = /usr/bin/vim
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[commit]
+	gpgsign = false
