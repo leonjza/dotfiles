@@ -1,0 +1,15 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontSize":14,
+    "editor.minimap.enabled": true,
+    "editor.cursorBlinking": "phase",
+
+    // open a file 'double-clicked' in Finder in the last
+    // open tab.
+    "window.openFilesInNewWindow": "off",
+    "window.restoreFullscreen": true,
+
+    // lol nope.jpg
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false
+}
