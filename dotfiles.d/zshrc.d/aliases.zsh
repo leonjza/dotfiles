@@ -15,8 +15,8 @@ alias please='sudo $(fc -ln -1)'
 # Kill jobs in the current session
 alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
 
-# Alias Screensaver on macOS as afk. My Mac locks when it starts.
-if [[ -f "/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine" ]]; then
+# Alias Screensaver on macOS High Sierra as afk. My Mac locks when it starts.
+if [[ -f "/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine" ]]; then
     alias afk="open -a ScreenSaverEngine"
 fi
 
