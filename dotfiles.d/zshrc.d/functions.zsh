@@ -91,7 +91,7 @@ function updatesoftware() {
     fi
 
     # Oh-My-Zsh
-    if type upgrade_oh_my_zsh 2>/dev/null; then
+    if type upgrade_oh_my_zsh >/dev/null; then
 
         echo " * Updating oh-my-zsh"
         upgrade_oh_my_zsh
