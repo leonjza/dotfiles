@@ -90,6 +90,14 @@ function updatesoftware() {
 
     fi
 
+    # Oh-My-Zsh
+    if hash upgrade_oh_my_zsh 2>/dev/null; then
+
+        echo " * Updating oh-my-zsh"
+        upgrade_oh_my_zsh
+
+    fi
+
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
 
