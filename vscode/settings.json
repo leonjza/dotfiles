@@ -1,4 +1,3 @@
-// Place your settings in this file to overwrite the default settings
 {
     "editor.fontSize":14,
     "editor.minimap.enabled": true,
@@ -7,9 +6,23 @@
     // open a file 'double-clicked' in Finder in the last
     // open tab.
     "window.openFilesInNewWindow": "off",
+
     "window.restoreFullscreen": true,
+
+    // CMD + N opens a new tab \o/
+    "window.nativeTabs": true,
 
     // lol nope.jpg
     "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false
+    "telemetry.enableTelemetry": false,
+    "vim.disableAnnoyingNeovimMessage": true,
+
+    // golang
+    "go.gopath": "UPDATE_ME",
+    "window.zoomLevel": 0,
+    "workbench.startupEditor": "newUntitledFile",
+    "python.disablePromptForFeatures": [
+        "pylint"
+    ],
+    "gitlens.keymap": "alternate"
 }
