@@ -11,7 +11,8 @@ ZSH_THEME="af-magic"
 # DISABLE_AUTO_UPDATE="true"
 
 # Display red dots whilst waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# https://github.com/zsh-users/zsh-autosuggestions/issues/14#issuecomment-104721378
+#COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
