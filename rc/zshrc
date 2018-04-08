@@ -10,8 +10,13 @@ ZSH_THEME="af-magic"
 # Disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Display red dots whilst waiting for completion
-# https://github.com/zsh-users/zsh-autosuggestions/issues/14#issuecomment-104721378
+# Fetch suggestions asynchronously.
+# https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
+ZSH_AUTOSUGGEST_USE_ASYNC="true"
+
+# Display red dots whilst waiting for completion.
+# Broken on macOS:
+#   https://github.com/zsh-users/zsh-autosuggestions/issues/14#issuecomment-104721378
 #COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
