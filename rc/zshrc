@@ -12,7 +12,8 @@ ZSH_THEME="af-magic"
 
 # Fetch suggestions asynchronously.
 # https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
-ZSH_AUTOSUGGEST_USE_ASYNC="true"
+# Broken, disables UP navigation :|
+#ZSH_AUTOSUGGEST_USE_ASYNC="true"
 
 # Display red dots whilst waiting for completion.
 # Broken on macOS:
