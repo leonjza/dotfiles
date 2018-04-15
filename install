@@ -505,9 +505,6 @@ function update_repo() {
     if [[ -d "$HOME/.dotfiles.d/zshrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d; fi
     if [[ -d "$HOME/.dotfiles.d/vimrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/vimrc.d/* $HOME/.dotfiles.d/vimrc.d; fi
 
-    echo "Update vim plugins"
-    vim +PluginUpdate +qall
-
     echo_green "Update complete. You may want to close/re-open your session for changes to take effect."
 }
 

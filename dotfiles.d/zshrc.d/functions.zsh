@@ -98,6 +98,13 @@ function updatesoftware() {
 
     fi
 
+    # VIM plugins
+    if hash vim 2>/dev/null; then
+
+        echo " * Upgrading VIM plugins"
+        vim +PluginUpdate +qall
+    fi
+
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
 
