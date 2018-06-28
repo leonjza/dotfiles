@@ -12,6 +12,9 @@ alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotf
 # Please do the last command as sudo
 alias please='sudo $(fc -ln -1)'
 
+# Quick history search
+alias hgrep="history | grep -i"
+
 # Kill jobs in the current session
 alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
 
