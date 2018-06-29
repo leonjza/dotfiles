@@ -9,9 +9,6 @@
 # Access to this dotfile installer
 alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install)"
 
-# Please do the last command as sudo
-alias please='sudo $(fc -ln -1)'
-
 # Quick history search
 alias hgrep="history | grep -i"
 
