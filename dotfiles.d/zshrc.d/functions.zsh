@@ -48,22 +48,6 @@ function urldecode() {
     python -c "import urllib as u; print(u.unquote_plus('$string'));"
 }
 
-# Print json string in a pretty formatted way
-function json() {
-
-	# Input is an argument
-    if [[ -t 0 ]]; then
-
-        python -mjson.tool <<< "$*"
-        return
-
-    fi
-
-    # Input is a pipe
-    python -mjson.tool
-
-}
-
 # Update the software from major package managers and the base OS
 function updatesoftware() {
 
@@ -183,4 +167,32 @@ function gpgdecrypt() {
     gpg --decrypt "$file" > "$file"decrypted
 
     echo "Output saved to $file.decrypted"
+}
+
+# Helper method to update the computers hostname
+function sethostname() {
+
+    local hostname=$1
+
+    echo "Updating hostname to: "$hostname
+
+    if hash scutil 2>/dev/null; then
+
+        echo "Using macOS method..."
+
+        sudo scutil --set ComputerName "$hostname"
+        sudo scutil --set LocalHostName "$hostname"
+        sudo scutil --set HostName "$hostname"
+
+    fi
+
+    if hash hostnamectl 2>/dev/null; then
+
+        echo "Using systemd method..."
+
+        hostnamectl set-hostname "$hostname"
+
+    fi
+
+    echo "Hostname updated."
 }
