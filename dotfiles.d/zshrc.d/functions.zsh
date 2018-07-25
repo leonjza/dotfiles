@@ -196,3 +196,12 @@ function sethostname() {
 
     echo "Hostname updated."
 }
+
+function b64decode () {
+
+    if hash gbase64 2>/dev/null; then
+        echo "$1" | gbase64 -d ; echo
+
+        return
+    fi
+}
