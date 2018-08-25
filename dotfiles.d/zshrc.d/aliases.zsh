@@ -72,3 +72,10 @@ if hash python2 2>/dev/null; then
     alias httpserver="python2 -m SimpleHTTPServer 0"
 
 fi
+
+# alias cat to bat: https://github.com/sharkdp/bat
+if hash bat 2>/dev/null; then
+
+    alias cat='bat'
+
+fi
