@@ -79,3 +79,17 @@ if hash bat 2>/dev/null; then
     alias cat='bat'
 
 fi
+
+# Create a preview command!
+# https://remysharp.com/2018/08/23/cli-improved#fzf--ctrlr
+if hash fzf 2>/dev/null; then
+
+    if hash bat 2>/dev/null; then
+
+        alias preview="fzf --preview 'bat --color \"always\" {}'"
+
+    else
+
+        alias preview="fzf --preview 'cat {}'"
+    fi
+fi
