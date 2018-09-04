@@ -80,6 +80,12 @@ if hash bat 2>/dev/null; then
 
 fi
 
+# exa! https://the.exa.website/
+if hash exa 2>/dev/null; then
+
+    alias ls='exa'
+fi
+
 # Create a preview command!
 # https://remysharp.com/2018/08/23/cli-improved#fzf--ctrlr
 if hash fzf 2>/dev/null; then
