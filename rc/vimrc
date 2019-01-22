@@ -4,6 +4,10 @@ set modeline
 
 filetype on
 
+" encoding
+set encoding=utf-8
+scriptencoding utf-8
+
 " Set the runtimepath for Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 
