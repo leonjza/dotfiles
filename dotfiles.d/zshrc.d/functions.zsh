@@ -94,10 +94,6 @@ function updatesoftware() {
 
         echo " * Upgrading Homebrew"
         brew upgrade
-
-        echo " * Cleaning old versions in Homebrew"
-        brew cleanup
-
     fi
 
     # Composer global libraries
