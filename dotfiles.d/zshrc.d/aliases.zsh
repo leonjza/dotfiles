@@ -16,8 +16,8 @@ alias hgrep="history | grep -i"
 alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
 
 # Clean and restore the prompt for screenshots or something
-alias cprompt="PS1BAK=$PS1 && PS1=\"$ \""
-alias oprompt="PS1=$PS1BAK"
+alias cprompt="PS1BAK=\$PS1 && PS1=\"$ \""
+alias oprompt="PS1=\$PS1BAK"
 
 # Alias Screensaver on macOS High Sierra as afk. My Mac locks when it starts.
 if [[ -f "/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine" ]]; then
