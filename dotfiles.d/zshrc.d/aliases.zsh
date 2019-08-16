@@ -84,6 +84,12 @@ if hash bat 2>/dev/null; then
 
 fi
 
+# use rsync for cp == progress indicator!
+if hash resync 2>/dev/null; then
+
+    alias cp="rsync -ah --inplace --info=progress2"
+fi
+
 # exa! https://the.exa.website/
 if hash exa 2>/dev/null; then
 
