@@ -35,6 +35,13 @@ source $ZSH/oh-my-zsh.sh
 # Clear the RPROMPT
 RPROMPT=""
 
+# Update theme to not include the horizontal ---- line
+PROMPT='$FG[032]%~\
+$(git_prompt_info) \
+$FG[105]%(!.#.»)%{$reset_color%} '
+PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
+RPS1='${return_code}'
+
 # Adding your own configurations should be done by adding files
 # to the following directory:
 #   ~/.dotfiles.d/zshrc.d/
