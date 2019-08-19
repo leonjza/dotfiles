@@ -56,3 +56,5 @@ if [ -d $HOME/.dotfiles.d/zshrc.d ]; then
   done
 
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
