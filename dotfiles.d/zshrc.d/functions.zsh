@@ -94,6 +94,7 @@ function updatesoftware() {
 
         echo " * Upgrading Homebrew"
         brew upgrade
+        brew cask upgrade
     fi
 
     # Composer global libraries
