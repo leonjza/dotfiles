@@ -240,12 +240,9 @@ function install_zsh() {
     echo_debug "Saving installer to $temp"
     curl "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" $temp
 
-    echo_debug "Preventing the installer from starting ZSH when its done"
-    export RUNZSH="no"
-
     echo "Running oh-my-zsh installer..."
     echo_debug "Using sh to run $temp"
-    sh $temp
+    RUNZSH='no' sh $temp    # https://github.com/robbyrussell/oh-my-zsh/blob/master/tools/install.sh#L24
     echo_debug "Removing downloaded installer"
     rm -f $temp
 
