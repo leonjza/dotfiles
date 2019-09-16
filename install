@@ -241,7 +241,7 @@ function install_zsh() {
     curl "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" $temp
 
     echo_debug "Preventing the installer from starting ZSH when its done"
-    sed -i -r "s/env zsh//" $temp
+    export RUNZSH="no"
 
     echo "Running oh-my-zsh installer..."
     echo_debug "Using sh to run $temp"
