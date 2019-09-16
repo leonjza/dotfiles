@@ -92,9 +92,12 @@ function updatesoftware() {
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
 
-        echo " * Upgrading Homebrew"
+        echo " * Upgrading Homebrew, packages and casks"
         brew upgrade
         brew cask upgrade
+
+        echo " * Performing bew cleanup"
+        brew cleanup
     fi
 
     # Composer global libraries
