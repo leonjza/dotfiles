@@ -8,6 +8,11 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 # Composer, globally installed binaries
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
+# Ensure EDITOR is vim, if possible
+if hash vim 2>/dev/null; then
+    export EDITOR=vim
+fi
+
 # https://github.com/silvanocerza/dotfiles/blob/master/zsh/zshrc#L46
 #
 # If current selection is a text file shows its content,
