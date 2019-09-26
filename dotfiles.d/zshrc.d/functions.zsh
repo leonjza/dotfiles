@@ -96,7 +96,7 @@ function updatesoftware() {
         brew upgrade
         brew cask upgrade
 
-        echo " * Performing bew cleanup"
+        echo " * Performing brew cleanup"
         brew cleanup
     fi
 
