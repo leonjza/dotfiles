@@ -5,8 +5,26 @@ add_newline = false
 [character]
 symbol = "»"
 
+[git_branch]
+symbol = "🌱 "
+truncation_length = 4
+truncation_symbol = ""
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷"
+stashed = "📦"
+modified = "📝"
+staged = "➕"
+renamed = "👅"
+deleted = "🗑"
+
 [directory]
 truncation_length = 8
+truncate_to_repo = false
 style = "fg:32"
 
 # Disable multiline prompt
@@ -14,4 +32,4 @@ style = "fg:32"
 disabled = true
 
 [hostname]
-ssh_only = true
+disabled = true
