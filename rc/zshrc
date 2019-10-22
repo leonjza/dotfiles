@@ -10,19 +10,6 @@ ZSH_THEME="af-magic"
 # Timestamp history output
 HIST_STAMPS="yyyy-mm-dd"
 
-# Disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Fetch suggestions asynchronously.
-# https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
-# Broken, disables UP navigation :|
-#ZSH_AUTOSUGGEST_USE_ASYNC="true"
-
-# Display red dots whilst waiting for completion.
-# Broken on macOS:
-#   https://github.com/zsh-users/zsh-autosuggestions/issues/14#issuecomment-104721378
-#COMPLETION_WAITING_DOTS="true"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -40,6 +27,10 @@ PROMPT='$FG[032]%~\
 $(git_prompt_info) \
 $FG[105]%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
+
+# If you want to have the hostname as part of the prompt, edit
+# ~/.dotfiles.d/zshrc.d/local.zsh and add the line:
+# PROMPT="%{$fg[green]%}%m%{$reset_color%} ${PROMPT}"
 
 # Adding your own configurations should be done by adding files
 # to the following directory:
