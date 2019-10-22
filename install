@@ -37,7 +37,7 @@ vim_rc="$HOME/.vimrc"
 tmux_conf="$HOME/.tmux.conf"
 gdb_init="$HOME/.gdbinit"
 starship_config="$HOME/.config/starship.toml"
-dot_config = "$HOME/.config"
+dot_config="$HOME/.config"
 
 rc_backup_dir="$HOME/.dotfiles.d/backups"
 
