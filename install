@@ -36,7 +36,7 @@ vim_plugin_dir="$HOME/.vim"
 vim_rc="$HOME/.vimrc"
 tmux_conf="$HOME/.tmux.conf"
 gdb_init="$HOME/.gdbinit"
-starship_config="$HOME/.config/starship.toml"
+#starship_config="$HOME/.config/starship.toml"
 dot_config="$HOME/.config"
 
 rc_backup_dir="$HOME/.dotfiles.d/backups"
@@ -243,10 +243,10 @@ function install_zsh() {
         return
     fi
 
-    if ! hash starship 2>/dev/null; then
-        echo_yellow "You don't have starship installed! we will fall back to the default config."
-        echo_yellow "You can install starship later and get all the magic!"
-    fi
+    #if ! hash starship 2>/dev/null; then
+    #    echo_yellow "You don't have starship installed! we will fall back to the default config."
+    #    echo_yellow "You can install starship later and get all the magic!"
+    #fi
 
     # Ensure that *.d directory exists
     echo_debug "Creating *.d directory in $HOME/.dotfiles.d/zshrc.d"
@@ -287,16 +287,16 @@ function install_zsh() {
     fi
 
     ## Backup a current starship config
-    if [[ -f "$starship_config" ]]; then
-        backup_config $starship_config
-    fi
+    #if [[ -f "$starship_config" ]]; then
+    #    backup_config $starship_config
+    #fi
 
     echo_debug "Symlinking $gitpath/rc/zshrc to $zsh_rc"
     ln -sf $gitpath/rc/zshrc $zsh_rc
 
-    echo_debug "Symlinking $gitpath/starship/starship.toml to $starship_config"
-    prepare_local_dot_config
-    ln -sf $gitpath/starship/starship.toml $starship_config
+    #echo_debug "Symlinking $gitpath/starship/starship.toml to $starship_config"
+    #prepare_local_dot_config
+    #ln -sf $gitpath/starship/starship.toml $starship_config
 
     echo "Symlinking *.zsh files to $HOME/.dotfiles.d/zshrc.d/"
     ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d
@@ -489,11 +489,11 @@ function uninstall_components() {
 
             rm -Rf $oh_my_zsh
             rm -f $zsh_rc
-            unlink $starship_config
+            #unlink $starship_config
             echo "Attempting to restore a backup zshrc if it exists"
             restore_config $zsh_rc
-            echo "Attempting to restore a backup starship.toml if it exists"
-            restore_config $starship_config
+            #echo "Attempting to restore a backup starship.toml if it exists"
+            #restore_config $starship_config
         ;;
         vim)
             rm -Rf $vim_plugin_dir
@@ -529,7 +529,7 @@ function update_repo() {
 
     if [[ -d "$HOME/.dotfiles.d/zshrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d; fi
     if [[ -d "$HOME/.dotfiles.d/vimrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/vimrc.d/* $HOME/.dotfiles.d/vimrc.d; fi
-    if [[ ! -f $starship_config ]]; then ln -sf $gitpath/starship/starship.toml $starship_config; fi
+    #if [[ ! -f $starship_config ]]; then ln -sf $gitpath/starship/starship.toml $starship_config; fi
 
     echo_green "Update complete. You may want to close/re-open your session for changes to take effect."
 }
