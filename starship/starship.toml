@@ -1,0 +1,14 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Replace the "❯" symbol in the prompt with "»"
+[character]
+symbol = "»"
+
+[directory]
+truncation_length = 8
+style = "fg:32"
+
+# Disable multiline prompt
+[line_break]
+disabled = true

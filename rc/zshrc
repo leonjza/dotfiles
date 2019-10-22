@@ -48,3 +48,8 @@ if [ -d $HOME/.dotfiles.d/zshrc.d ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Finally, if starship is installed, boot it!
+if hash starship 2>/dev/null; then
+  eval "$(starship init zsh)"
+fi
