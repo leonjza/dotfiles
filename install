@@ -226,7 +226,7 @@ function install_components() {
 
 function prepare_local_dot_config() {
 
-    if [[ ! -d "$dot_config"]]; then
+    if [[ ! -d "$dot_config" ]]; then
         mkdir $dot_config
         chmod 700 $dot_config
     fi
@@ -287,7 +287,7 @@ function install_zsh() {
     fi
 
     ## Backup a current starship config
-    if [[ -f "$starship_config"]]; then
+    if [[ -f "$starship_config" ]]; then
         backup_config $starship_config
     fi
 
@@ -529,7 +529,7 @@ function update_repo() {
 
     if [[ -d "$HOME/.dotfiles.d/zshrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/zshrc.d/* $HOME/.dotfiles.d/zshrc.d; fi
     if [[ -d "$HOME/.dotfiles.d/vimrc.d/" ]]; then ln -sf $gitpath/dotfiles.d/vimrc.d/* $HOME/.dotfiles.d/vimrc.d; fi
-    if [[ ! -f $starship_config]]; ln -sf $gitpath/starship/starship.toml; fi
+    if [[ ! -f $starship_config ]]; then ln -sf $gitpath/starship/starship.toml $starship_config; fi
 
     echo_green "Update complete. You may want to close/re-open your session for changes to take effect."
 }
