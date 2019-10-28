@@ -205,3 +205,18 @@ function b64decode () {
         return
     fi
 }
+
+# Create a new encrypted vol
+function newcryptvol () {
+
+    if hash hdiutil 2>/dev/null; then
+
+        local vol=$1
+        echo "Creating new volume: $vol"
+        hdiutil create -size 15GB -encryption AES-256 -type SPARSE -fs apfs -volname "$vol" $vol
+        mv $vol.sparseimage $vol.dmg
+        echo "Created $vol.dmg successfully."
+    else
+        echo "Could not find hdiutil, this is probably not macOS"
+    fi
+}
