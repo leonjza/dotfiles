@@ -214,8 +214,6 @@ function newcryptvol () {
         local vol=$1
         echo "Creating new volume: $vol"
         hdiutil create -size 15GB -encryption AES-256 -type SPARSE -fs apfs -volname "$vol" $vol
-        mv $vol.sparseimage $vol.dmg
-        echo "Created $vol.dmg successfully."
     else
         echo "Could not find hdiutil, this is probably not macOS"
     fi
