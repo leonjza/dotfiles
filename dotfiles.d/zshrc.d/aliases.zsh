@@ -87,7 +87,7 @@ fi
 # use rsync for cp == progress indicator!
 if hash rsync 2>/dev/null; then
 
-    alias cp="rsync -ah --inplace --info=progress2"
+    alias rcp="rsync -ah --inplace --info=progress2"
 fi
 
 # exa! https://the.exa.website/
