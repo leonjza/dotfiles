@@ -14,7 +14,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker extract httpie colored-man-pages fzf)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker docker-compose extract httpie colored-man-pages fzf)
 
 # Load up Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
