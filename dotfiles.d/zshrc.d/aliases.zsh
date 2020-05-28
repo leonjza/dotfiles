@@ -19,6 +19,9 @@ alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
 alias cprompt="PS1BAK=\$PS1 && PS1=\"$ \""
 alias oprompt="PS1=\$PS1BAK"
 
+# cleanup .DS_Store rubbish
+alias rmds="find . -name '*.DS_Store' -type f -delete"
+
 # Alias Screensaver on macOS High Sierra as afk. My Mac locks when it starts.
 if [[ -f "/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine" ]]; then
     alias afk="open -a ScreenSaverEngine"
