@@ -58,7 +58,7 @@ function updatesoftware() {
         echo " * Updating auto suggestions plugin"
         pushd . > /dev/null
         cd $AUTO_SUGGEST
-        git pull
+        git pull --ff-only
         popd > /dev/null
 
     fi
@@ -69,7 +69,7 @@ function updatesoftware() {
         echo " * Updating syntax highlighting plugin"
         pushd . > /dev/null
         cd $SYNTAX_HIGHLIGHT
-        git pull
+        git pull --ff-only
         popd > /dev/null
 
     fi
