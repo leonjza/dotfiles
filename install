@@ -522,7 +522,7 @@ function update_repo() {
 
     echo_debug "Running git pull on $gitpath"
     pushd $gitpath
-    git pull
+    git pull --rebase
     popd
 
     echo "Updating symlinks"
