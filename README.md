@@ -1,4 +1,5 @@
 # ⚡️.dotfiles | batteries included dotfile configurations
+
 This repository contains my public dotfiles. It comes with a single installer that will take care of installing, updating and backing up your existing configurations.
 
 To see what things look like, skip straight to [screenshots](#screenshots)!
@@ -14,11 +15,8 @@ To see what things look like, skip straight to [screenshots](#screenshots)!
 - [extending](#extending)
 - [errors](#errors)
 
-### other
-- [sublime text](#sublime-text-install)
-- [jetbrains](#jetbrains)
-
 ## installing
+
 The following command will install everything, backing up existing configs first and make available a new `dotfiles` command:
 
 `bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install) --install all`
@@ -28,6 +26,7 @@ After installation, a new `dotfiles` command will be come available that will do
 ![dotfiles](screenshots/dotfiles.png)
 
 ## uninstalling
+
 If for any reason you just cant get to like these configurations, removing them should be as easy as:
 
 `dotfiles --remove all`  
@@ -38,6 +37,7 @@ You can also remove only certain parts of the configs. For example, to remove `t
 ![dotfiles](screenshots/tmux_remove.png)
 
 ## updating
+
 Like what changed since you last installed? Just update your local install with:
 
 `dotfiles --update all`
@@ -47,13 +47,14 @@ Like what changed since you last installed? Just update your local install with:
 ![dotfiles](screenshots/dotfiles_update.png)
 
 ## backups
+
 During operation, the installer tries to create & restore backups where it deems it to be the right thing to do. Backups are located at:
 
 `~/.dotfiles.d/backups`
 
  If multiple backups were needed, they will have a timestamp added as a suffix.
 
- ```
+ ```text
  ~ » ls -lah ~/.dotfiles.d/backups
 total 60K
 drwxrwxr-x 2 leon leon 4.0K Sep 10 17:37 .
@@ -76,30 +77,29 @@ drwxrwxr-x 5 leon leon 4.0K Sep 10 15:20 ..
  When a restore occurs, it will pick the newest one. Of course you can override that by replacing a config files with a specific version found in the backup directory.
 
 ## screenshots
+
 ### Vi
+
 Editing a python source file.
 ![vim](screenshots/vim.png "Vi")
-### Sublime Text
-Editing a PHP source file.
-![ZSH](screenshots/sublime.png "Sublime Text")
-### PyCharm
-Editing Python in PyCharm 2016.2
-![ZSH](screenshots/pycharm.png "PyCharm")
-### PhpStorm
-Editing PHP PhpStorm 2016.2
-![ZSH](screenshots/phpstorm.png "PhpStorm")
+
 ### gdb
+
 Debugging a test program with gdb & peda.
 ![gdb](screenshots/gdb.png "gdb")
+
 ### Zsh
+
 Shell history completion.
 ![ZSH](screenshots/shell.png "ZSH Shell")
 
 ## whats included
+
 Configurations for `zsh`, `vim`, `tmux` and `gdb`!  
 These dotfiles contain a number of maybe surprising things! Lets take a quick look.
 
 ### zsh
+
 | Command        | Type           | Source  | Description |
 | ------------- |:-------------:|:------:| ------------|
 | `dotfiles`      | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience command to the `dotfiles` installer |
@@ -140,6 +140,7 @@ Apart from the commands, there are also things like:
 ![color man](screenshots/colorman.png)
 
 ### vim
+
 - A theme that is really easy on the eye, imo anyways.
 - A sexy syntax checker that will let you know as you save the file where a line of code may cause syntax/parsing errors.
 
@@ -156,7 +157,9 @@ Apart from the commands, there are also things like:
 - A few other **sane** defaults. Well, sane for me anyways ;)
 
 ## extending
+
 The layout of this project is mostly driven by a few core ideas:
+
 - It should be easy to update, no matter what the added config of the install.
 - It should be easy to extend the dotfiles and add environment specific files/changes.
 - Base rc files should set some required defaults, and then source all other configs from `*.d` style directories.
@@ -173,6 +176,7 @@ I generally just create a file called `local.zsh` in `~/.dotfiles.d/zshrc.d/` wi
 Files added to the `*.d` type folders will remain there, even after upgrades and removals. So, keep that in mind!
 
 ## errors
+
 Sometimes stuff goes wrong. The most common being colors/weird unicode errors. To make sure the colors show correctly, as well as the unicode displays correctly, ensure that your `TERM` and `LANG` environment variables are set in your shell:
 
 ```bash
@@ -184,11 +188,3 @@ TERM=xterm-256color
 You should probably also set this in your terminal emulator (iTerm2 in my case) or as an `export` in your local `~/.dotfiles.d/zshrc.d/config.zsh` file:
 
 ![ZSH](screenshots/iterm_profile.png "ZSH Shell")
-
-## other
-
-### sublime text install
-For the sublime text installation process, please refer to the [README](https://github.com/leonjza/dotfiles/tree/master/SublimeText).
-
-### jetbrains
-Jetbrains editors allow the import/export of settings via the IDE's themselves. The [jetbrains](https://github.com/leonjza/dotfiles/tree/master/jetbrains) folder contains the *Look & Feel* settings that can be imported.
