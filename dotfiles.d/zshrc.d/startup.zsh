@@ -2,7 +2,9 @@
 #
 # Commands specified here run on shell startup
 
-# Run pfetch if available.
+# Run pfetch if available, otherwise neofetch
 if hash pfetch 2>/dev/null; then
     pfetch
+else hash neofetch 2>/dev/null; then
+    neofetch
 fi
