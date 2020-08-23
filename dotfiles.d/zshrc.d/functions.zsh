@@ -78,7 +78,7 @@ function updatesoftware() {
     if type upgrade_oh_my_zsh >/dev/null; then
 
         echo " * Updating oh-my-zsh"
-        upgrade_oh_my_zsh
+        omz update
 
     fi
 
