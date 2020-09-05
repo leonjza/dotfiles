@@ -94,7 +94,7 @@ function updatesoftware() {
 
         echo " * Upgrading Homebrew, packages and casks"
         brew upgrade
-        brew cask upgrade
+        brew upgrade --cask
 
         echo " * Performing brew cleanup"
         brew cleanup
