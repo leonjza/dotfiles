@@ -3,7 +3,6 @@
 This repository contains my public dotfiles. It comes with a single installer that will take care of installing, updating and backing up your existing configurations.
 
 ![shell](screenshots/shell.png)
-![vim](screenshots/neovim.png)
 
 ## toc
 
