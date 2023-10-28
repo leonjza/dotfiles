@@ -46,7 +46,7 @@ PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 #   ~/.zshrc-local.d/
 
 # Load all *.zsh files from ./rc.d directory.
-MYPATH=$(dirname "$0")
+MYPATH="$( cd -- "$(dirname -- "$0")" >/dev/null 2>&1 ; pwd -P )"
 if [ -d $MYPATH/.zshrc.d ]; then
   for file in $MYPATH/.zshrc.d/*.zsh; do
     source $file
