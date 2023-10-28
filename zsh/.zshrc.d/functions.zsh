@@ -54,44 +54,36 @@ function updatesoftware() {
     # Update ZSH Plugins
     AUTO_SUGGEST="$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     if [[ -d $AUTO_SUGGEST ]]; then
-
         echo " * Updating auto suggestions plugin"
         pushd . > /dev/null
         cd $AUTO_SUGGEST
         git pull --ff-only
         popd > /dev/null
-
     fi
 
     SYNTAX_HIGHLIGHT="$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     if [[ -d $SYNTAX_HIGHLIGHT ]]; then
-
         echo " * Updating syntax highlighting plugin"
         pushd . > /dev/null
         cd $SYNTAX_HIGHLIGHT
         git pull --ff-only
         popd > /dev/null
-
     fi
 
     # Oh-My-Zsh
     if type upgrade_oh_my_zsh >/dev/null; then
-
         echo " * Updating oh-my-zsh"
         omz update --unattended
-
     fi
 
-    # VIM plugins
-    if hash vim 2>/dev/null; then
-
-        echo " * Upgrading VIM plugins"
-        vim +PluginUpdate +qall
+    # neovim plugins
+    if hash nvim 2>/dev/null; then
+        echo " * Upgrading astrovim && plugins"
+        nvim +AstroUpdate +AstroUpdatePackages +qall
     fi
 
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
-
         echo " * Upgrading Homebrew, packages and casks"
         brew upgrade
         brew upgrade --cask
@@ -100,20 +92,8 @@ function updatesoftware() {
         brew cleanup
     fi
 
-    # Composer global libraries
-    if hash composer 2>/dev/null; then
-
-        echo " * Updating composer itself"
-        composer self-update
-
-        echo " * Upgrading Composer global"
-        composer global update
-
-    fi
-
     # Update Debian based OS
     if hash apt-get 2>/dev/null; then
-
         echo " * Updating OS via apt"
         sudo apt-get update && sudo apt-get upgrade -y
 
@@ -124,10 +104,8 @@ function updatesoftware() {
 
     # Update Redhat based OS
     if hash yum 2>/dev/null; then
-
         echo " * Updating OS via yum"
         sudo yum update -y
-
     fi
 
 }
@@ -151,7 +129,7 @@ function gpgdecrypt() {
 }
 
 # Helper method to update the computers hostname
-function sethostname() {
+function setmachostname() {
 
     local hostname=$1
 
