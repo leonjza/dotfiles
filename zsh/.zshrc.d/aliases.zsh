@@ -42,6 +42,11 @@ if hash git 2>/dev/null; then
     alias nah="git reset --hard;git clean -df"
 fi
 
+# alias vim to neovim
+if hash nvim 2>/dev/null; then
+    alias vim="nvim"
+fi
+
 # Alias proxychains. macOS & brew seems to have it as proxychanins4
 # and *everywhere* else its just proxychains
 if hash proxychains 2>/dev/null || hash proxychains4 2>/dev/null; then
