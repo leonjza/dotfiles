@@ -13,10 +13,9 @@ cat <<"EOF"
 
 EOF
 
-# required
 declare -a REQUIRED=( "git" "stow" "curl" )
-# optional
 declare -a OPTIONAL=( "zsh" "nvim" )
+declare -a STOWABLES=( "git" "skhd" "tmux" "yabai" "zsh" )
 
 ###
 function green() { command echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
@@ -68,8 +67,22 @@ function f_usage() {
     echo "  unstow      remove symlinks (removing configs)"
 }
 
-# funcs
+function f_backup() {
+    target=$1
 
+    mkdir -p $BACKUPDIR
+
+    if [[ -f $c ]] # exists
+    then
+        if [[ ! -L $c ]] # and is not a symlink
+        then
+            yellow "backing up $c to $BACKUPDIR"
+            mv $c $BACKUPDIR/$(basename $c)
+        fi
+    fi
+}
+
+# funcs
 function f_install() {
 
 	echo
@@ -84,6 +97,7 @@ function f_install() {
     if command -v zsh &> /dev/null
     then
         green "installing oh-my-zsh and plugins"
+        f_backup "$HOME/.zshrc"
 
     	# base oh-my-zsh
         local temp="$(mktemp)"
@@ -108,43 +122,31 @@ function f_install() {
         yellow "skipping neovim config"
     fi
 
+    # other targets that dont have anything to download but need backups
+    f_backup "$HOME/.tmux.conf"
+
     green "installation done."
     f_stow
 }
 
 function f_stow() {
+    echo "stowing configurations"
 
-    local configs=(
-        "$HOME/.zshrc"
-        "$HOME/.tmux.conf"
-        "$HOME/.zshrc"
-    )
-    
-
-    mkdir -p $BACKUPDIR
-
-    for c in "${configs[@]}"
+    for s in "${STOWABLES[@]}"
     do
-        if [[ -f $c ]] # exists
-        then
-            if [[ ! -L $c ]] # and is not a symlink
-            then
-                yellow "backing up $c to $BACKUPDIR" 
-                mv $c $BACKUPDIR/$(basename $c)
-            fi
-        fi
+        stow -t $HOME/ --restow $s
     done
-
-    echo "stowing configuration"
-    stow -t $HOME/ --restow zsh git tmux
 }
 
 function f_unstow() {
-    echo "performing unstow."
+    yellow "performing unstow"
     echo "your old configs should be at $BACKUPDIR" 
-    stow -t $HOME/ --delete zsh git tmux
-}
 
+    for s in "${STOWABLES[@]}"
+    do
+        stow -t $HOME/ --delete $s
+    done
+}
 
 # parse commandline arguments
 subcommand=$1
@@ -157,7 +159,7 @@ case $subcommand in
         if ! fn_exists f_${subcommand}
         then
             echo "error: '$subcommand' is not a known command."
-            echo "see: $0 usage"
+            echo "  see: $0 usage"
             exit 1
         fi
         f_${subcommand} $@

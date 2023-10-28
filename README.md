@@ -1,6 +1,6 @@
 # ⚡️.dotfiles | batteries included dotfile configurations
 
-This repository contains my public dotfiles. It comes with a single installer that will take care of installing, updating and backing up your existing configurations.
+This repository contains my public dotfiles. It comes with a single installer that will take care of installing, updating and backing up your existing configurations while using `stow`.
 
 ![shell](screenshots/shell.png)
 
