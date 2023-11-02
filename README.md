@@ -12,6 +12,16 @@ This repository contains my public dotfiles. It comes with a single installer th
 - [backups](#backups)
 - [whats included](#whats-included)
 
+## reccomended software
+
+These dotfiles configure a few programs. Most of them are for convenience, and apart from the required programs which the installer will complain about, are completely optional.
+
+- [yabai](https://github.com/koekeishiya/yabai) - a tiling window manager (macOS only)
+- [skhd](https://github.com/koekeishiya/skhd) - a hotkey daemon (macOS only)
+- [eza](https://github.com/eza-community/eza) - a modern replacement for ls
+- [bat](https://github.com/sharkdp/bat) - a cat clone
+- [neovim](https://neovim.io/) - a vim-fork focused on extensibility and usability
+
 ## installing
 
 You probably want to fork this repo unless you are happy with exactly what I have here. Regardless, clone the repo somewhere. This will become the source of your dotfiles too.
