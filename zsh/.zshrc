@@ -35,14 +35,6 @@ plugins=(zsh-syntax-highlighting zsh-autosuggestions docker docker-compose extra
 # Load up Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 
-# If you want to have the hostname as part of the prompt, edit
-# ./.zshrc.d/local.zsh and add the line:
-# PROMPT="%{$fg[green]%}%m%{$reset_color%} ${PROMPT}"
-
-# Adding your own configurations should be done by adding .zsh files
-# to the following directory:
-#   ~/.zshrc-local.d/
-
 # powerlevel10k prompt
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

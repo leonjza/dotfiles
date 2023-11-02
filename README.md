@@ -7,6 +7,7 @@ This repository contains my public dotfiles. It comes with a single installer th
 ## toc
 
 - [installing](#installing)
+- [overrides](#overrides)
 - [uninstalling](#uninstalling)
 - [updating](#updating)
 - [backups](#backups)
@@ -65,6 +66,10 @@ Subcommands:
 ```
 
 If there are any errors, i.e., a required command is missing then you'd need to install those first.
+
+## overrides
+
+If you want to override anything, or, include something that should not live in a git repo, then add your own `.zsh` files to `~/.zshrc-local.d`. Files ending with the `.zsh` extention in this path will be sourced when the shell starts.
 
 ## uninstalling
 
