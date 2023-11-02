@@ -35,15 +35,6 @@ plugins=(zsh-syntax-highlighting zsh-autosuggestions docker docker-compose extra
 # Load up Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Clear the RPROMPT that af-magic has
-RPROMPT=""
-
-# Update theme to not include the horizontal ---- line
-PROMPT='$FG[032]%~\
-$(git_prompt_info) \
-$FG[105]%(!.#.»)%{$reset_color%} '
-PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
-
 # If you want to have the hostname as part of the prompt, edit
 # ./.zshrc.d/local.zsh and add the line:
 # PROMPT="%{$fg[green]%}%m%{$reset_color%} ${PROMPT}"
