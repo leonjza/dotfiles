@@ -16,6 +16,10 @@ This repository contains my public dotfiles. It comes with a single installer th
 
 You probably want to fork this repo unless you are happy with exactly what I have here. Regardless, clone the repo somewhere. This will become the source of your dotfiles too.
 
+The recommended font (with all of the icons etc.) is Meslo Nerd Font, and is documented [here](https://github.com/romkatv/powerlevel10k/blob/master/font.md).
+
+With the font installed and configured to be used in your terminal, clone the repo:
+
 ```bash
 git clone https://github.com/leonjza/dotfiles.git
 cd dotfiles
