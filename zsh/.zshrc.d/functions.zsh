@@ -70,6 +70,15 @@ function updatesoftware() {
         popd > /dev/null
     fi
 
+    P10_THEME="$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+    if [[ -d $P10_THEME ]]; then
+        echo " * Updating powerlevel10k theme"
+        pushd . > /dev/null
+        cd $P10_THEME
+        git pull --ff-only
+        popd > /dev/null
+    fi
+
     # Oh-My-Zsh
     if type upgrade_oh_my_zsh >/dev/null; then
         echo " * Updating oh-my-zsh"
