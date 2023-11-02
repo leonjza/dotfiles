@@ -12,7 +12,7 @@ This repository contains my public dotfiles. It comes with a single installer th
 - [backups](#backups)
 - [whats included](#whats-included)
 
-## reccomended software
+## recommended software
 
 These dotfiles configure a few programs. Most of them are for convenience, and apart from the required programs which the installer will complain about, are completely optional.
 
