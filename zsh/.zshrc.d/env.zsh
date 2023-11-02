@@ -10,6 +10,10 @@ if hash nvim 2>/dev/null; then
     export EDITOR=nvim
 fi
 
+# Set locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
 # https://github.com/silvanocerza/dotfiles/blob/master/zsh/zshrc#L46
 #
 # If current selection is a text file shows its content,
