@@ -15,7 +15,7 @@ EOF
 
 declare -a REQUIRED=( "git" "stow" "curl" )
 declare -a OPTIONAL=( "zsh" "nvim" )
-declare -a STOWABLES=( "git" "skhd" "tmux" "yabai" "zsh" )
+declare -a STOWABLES=( "git" "skhd" "tmux" "yabai" "zsh" "p10k" )
 
 ###
 function green() { command echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
@@ -109,6 +109,8 @@ function f_install() {
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
         # install zsh-autosuggestions
         git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        # install powerlevel10k
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     else
         yellow "skipping oh-my-zsh"
     fi

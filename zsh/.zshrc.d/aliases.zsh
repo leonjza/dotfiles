@@ -19,6 +19,9 @@ alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
 alias cprompt="PS1BAK=\$PS1 && PS1=\"$ \""
 alias oprompt="PS1=\$PS1BAK"
 
+# git shorthand
+alias g="git"
+
 # cleanup .DS_Store rubbish
 alias rmds="find . -name '*.DS_Store' -type f -delete"
 
