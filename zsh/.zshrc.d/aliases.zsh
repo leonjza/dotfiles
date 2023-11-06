@@ -6,9 +6,6 @@
 
 # Simple aliases
 
-# Access to this dotfile installer
-alias dotfiles="bash <(curl -fsSL https://raw.githubusercontent.com/leonjza/dotfiles/master/install)"
-
 # Quick history search
 alias hgrep="history | grep -i"
 
@@ -71,11 +68,6 @@ fi
 # Python Tools
 if hash python3 2>/dev/null; then
     alias httpserver="python3 -m http.server 0"
-fi
-
-# alias cat to bat: https://github.com/sharkdp/bat
-if hash bat 2>/dev/null; then
-    alias batcat='bat'
 fi
 
 # use rsync for cp == progress indicator!
