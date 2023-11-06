@@ -127,8 +127,7 @@ function f_install() {
     # other targets that dont have anything to download but need backups
     f_backup "$HOME/.tmux.conf"
 
-    green "installation done."
-    f_stow
+    green "installation done. use the stow subcommand to link configurations."
 }
 
 function f_stow() {
