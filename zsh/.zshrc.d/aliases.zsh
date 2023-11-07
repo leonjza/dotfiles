@@ -16,8 +16,10 @@ alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
 alias cprompt="PS1BAK=\$PS1 && PS1=\"$ \""
 alias oprompt="PS1=\$PS1BAK"
 
-# git shorthand
+# git aliases
 alias g="git"
+alias glog="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\""
+alias gcl="git clone --recurse-submodules"
 
 # cleanup .DS_Store rubbish
 alias rmds="find . -name '*.DS_Store' -type f -delete"
