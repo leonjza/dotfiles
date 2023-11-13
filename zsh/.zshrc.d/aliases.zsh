@@ -24,6 +24,11 @@ alias gcl="git clone --recurse-submodules"
 # cleanup .DS_Store rubbish
 alias rmds="find . -name '*.DS_Store' -type f -delete"
 
+# fancy cat via bat. remove lines, borders and the pager with -pp
+if hash bat 2>/dev/null; then
+    alias cat="bat -pp"
+fi
+
 # Alias ports to lsof for tcp connections
 if hash lsof 2>/dev/null; then
     alias ports="sudo lsof -iTCP -sTCP:LISTEN -P"
