@@ -88,7 +88,7 @@ function updatesoftware() {
     # neovim plugins
     if hash nvim 2>/dev/null; then
         echo " * Upgrading astrovim && plugins"
-        nvim +AstroUpdate +AstroUpdatePackages +qall
+        nvim +AstroUpdate +qall
     fi
 
     # Upgrade Homebrew
