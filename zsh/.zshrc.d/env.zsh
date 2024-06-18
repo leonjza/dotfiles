@@ -22,7 +22,7 @@ FZF_CTRL_T_OPTS="--preview-window wrap --preview '
 if [[ -f {} ]]; then
     file --mime {} | grep -q \"text\/.*;\" && bat --color \"always\" {} || (tput setaf 1; file --mime {})
 elif [[ -d {} ]]; then
-    exa -l --color always {}
+    ls -l --color {}
 else;
     tput setaf 1; echo YOU ARE NOT SUPPOSED TO SEE THIS!
 fi'"
