@@ -2,9 +2,6 @@
 #
 # Any environment specific changes should live in here
 
-# Ensure bew bin (/usr/local/bin) is in PATH
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-
 # Ensure EDITOR is neovim, if possible
 if hash nvim 2>/dev/null; then
     export EDITOR=nvim

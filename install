@@ -120,6 +120,7 @@ function f_install() {
     then
         green "installing neovim config, astrovim"
         git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+        rm -rf ~/.config/nvim/.git
     else
         yellow "skipping neovim config"
     fi
