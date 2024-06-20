@@ -15,7 +15,7 @@ EOF
 
 declare -a REQUIRED=( "git" "stow" "curl" )
 declare -a OPTIONAL=( "zsh" "nvim" )
-declare -a STOWABLES=( "git" "skhd" "tmux" "yabai" "zsh" "p10k" )
+declare -a STOWABLES=( "skhd" "tmux" "yabai" "zsh" "p10k" )
 
 ###
 function green() { command echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
