@@ -82,7 +82,7 @@ function updatesoftware() {
     # Oh-My-Zsh
     if type upgrade_oh_my_zsh >/dev/null; then
         echo " * Updating oh-my-zsh"
-        omz update --unattended
+        omz update
     fi
 
     # neovim plugins
