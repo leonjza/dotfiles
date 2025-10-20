@@ -20,6 +20,7 @@ alias oprompt="PS1=\$PS1BAK"
 alias g="git"
 alias glog="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\""
 alias gcl="git clone --recurse-submodules"
+alias gss="git status --short -b"
 
 # cleanup .DS_Store rubbish
 alias rmds="find . -name '*.DS_Store' -type f -delete"
