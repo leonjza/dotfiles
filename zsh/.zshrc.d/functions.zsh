@@ -3,6 +3,9 @@
 # Any extra shell functions should live here. I guess this
 # could go in aliases.zsh, but heh.
 
+function take() {
+  [[ -n $1 ]] && mkdir -p -- "$1" && builtin cd -- "$1"
+}
 
 # Update the software from major package managers and the base OS
 function updatesoftware() {
@@ -55,6 +58,27 @@ function updatesoftware() {
         sudo yum update -y
     fi
 
+}
+
+# Reset changes in a git repository with a confirmation prompt
+function nah() {
+    if ! hash git 2>/dev/null; then
+        return 1
+    fi
+
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Not a git repository."
+        return 1
+    fi
+
+    echo "This will run: git reset --hard; git clean -df"
+    read -r "reply?Type 'yes' to continue: "
+    if [[ $reply == "yes" ]]; then
+        git reset --hard
+        git clean -df
+    else
+        echo "Aborted."
+    fi
 }
 
 # Create a new encrypted vol

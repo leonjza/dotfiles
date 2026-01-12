@@ -12,6 +12,18 @@ alias glog="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgr
 alias gcl="git clone --recurse-submodules"
 alias gss="git status --short -b"
 
+# docker compose aliases
+[[ -x "${commands[docker-compose]:A}" ]] && dccmd='docker-compose' || dccmd='docker compose'
+
+alias dce="$dccmd exec"
+alias dcps="$dccmd ps"
+alias dcstop="$dccmd stop"
+alias dcup="$dccmd up"
+alias dcdn="$dccmd down"
+alias dcl="$dccmd logs"
+alias dclf="$dccmd logs -f"
+alias dcpull="$dccmd pull"
+
 # fancy cat via bat. remove lines, borders and the pager with -pp
 if hash bat 2>/dev/null; then
     alias cat="bat -pp"
@@ -32,26 +44,6 @@ if hash gdb 2>/dev/null; then
     alias gdb="gdb -q"
 fi
 
-# Reset changes in a git repository with a confirmation prompt
-function nah() {
-    if ! hash git 2>/dev/null; then
-        return 1
-    fi
-
-    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        echo "Not a git repository."
-        return 1
-    fi
-
-    echo "This will run: git reset --hard; git clean -df"
-    read -r "reply?Type 'yes' to continue: "
-    if [[ $reply == "yes" ]]; then
-        git reset --hard
-        git clean -df
-    else
-        echo "Aborted."
-    fi
-}
 
 # alias vim to neovim
 if hash nvim 2>/dev/null; then
