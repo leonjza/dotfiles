@@ -23,6 +23,17 @@ Once cloned, stow the configurations.
 
 You can also run `./install backup` to back up existing configs first, or `./install stow --dry-run` to preview backups.
 
+## recommended software
+
+This repo assumes or enhances the following tools. Some are optional, but a few aliases/functions light up when they are installed.
+
+- `zsh` + `stow` (core shell and symlink manager)
+- `git` (aliases and workflows)
+- `neovim` (used by `vim` alias and plugin updates)
+- `tmux` (included configuration)
+- `bat` (pretty `cat`)
+- `eza` (better `ls`)
+
 ## overrides
 
 If you want to override anything, or, include something that should not live in a git repo, then add your own `.zsh` files to `~/.zshrc-local.d`. Files ending with the `.zsh` extention in this path will be sourced when the shell starts.
@@ -59,8 +70,8 @@ These dotfiles contain a number of maybe surprising things! Lets take a quick lo
 
 ### zsh
 
-| Command        | Type           | Source  | Description |
-| ------------- |:-------------:|:------:| ------------|
+| Command | Type | Source | Description |
+| ------------- |: -------------:|:------:| ------------|
 | `chain`      | alias      | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to `proxychains` |
 | `nah` | function | [view](zsh/.zshrc.d/aliases.zsh) | Reset tracked and untracked changes in the current git repo (with confirmation) |
 | `ports` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to view open ports on macOS |
