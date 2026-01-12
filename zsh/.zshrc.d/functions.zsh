@@ -33,11 +33,8 @@ function updatesoftware() {
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
         _us_header "Upgrading Homebrew, packages and casks"
+        brew update
         brew upgrade
-        brew upgrade --cask
-
-        _us_header "Performing Homebrew cleanup"
-        brew cleanup
     else
         _us_header "Skipping Homebrew (not installed)"
     fi
