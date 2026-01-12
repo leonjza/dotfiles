@@ -85,12 +85,6 @@ function updatesoftware() {
         omz update
     fi
 
-    # neovim plugins
-    if hash nvim 2>/dev/null; then
-        echo " * Upgrading astrovim && plugins"
-        nvim +AstroUpdate +qall
-    fi
-
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
         echo " * Upgrading Homebrew, packages and casks"
