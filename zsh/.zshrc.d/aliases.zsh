@@ -6,24 +6,11 @@
 
 # Simple aliases
 
-# Quick history search
-alias hgrep="history | grep -i"
-
-# Kill jobs in the current session
-alias killjobs='echo $(jobs -p | awk "{ print $3 }") | xargs -t kill -9'
-
-# Clean and restore the prompt for screenshots or something
-alias cprompt="PS1BAK=\$PS1 && PS1=\"$ \""
-alias oprompt="PS1=\$PS1BAK"
-
 # git aliases
 alias g="git"
 alias glog="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\""
 alias gcl="git clone --recurse-submodules"
 alias gss="git status --short -b"
-
-# cleanup .DS_Store rubbish
-alias rmds="find . -name '*.DS_Store' -type f -delete"
 
 # fancy cat via bat. remove lines, borders and the pager with -pp
 if hash bat 2>/dev/null; then
@@ -45,10 +32,26 @@ if hash gdb 2>/dev/null; then
     alias gdb="gdb -q"
 fi
 
-# Alias nah to reset changes in a git repository
-if hash git 2>/dev/null; then
-    alias nah="git reset --hard;git clean -df"
-fi
+# Reset changes in a git repository with a confirmation prompt
+function nah() {
+    if ! hash git 2>/dev/null; then
+        return 1
+    fi
+
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Not a git repository."
+        return 1
+    fi
+
+    echo "This will run: git reset --hard; git clean -df"
+    read -r "reply?Type 'yes' to continue: "
+    if [[ $reply == "yes" ]]; then
+        git reset --hard
+        git clean -df
+    else
+        echo "Aborted."
+    fi
+}
 
 # alias vim to neovim
 if hash nvim 2>/dev/null; then
@@ -65,35 +68,7 @@ if hash proxychains 2>/dev/null || hash proxychains4 2>/dev/null; then
     fi
 fi
 
-# Alias httpie & method to just the method
-if hash http 2>/dev/null; then
-    for method in get post put delete; do
-        alias $method="http $method"
-    done
-
-fi
-
-# Python Tools
-if hash python3 2>/dev/null; then
-    alias httpserver="python3 -m http.server 0"
-fi
-
-# use rsync for cp == progress indicator!
-if hash rsync 2>/dev/null; then
-    alias rcp="rsync -ah --inplace --info=progress2"
-fi
-
-# exa! https://the.exa.website/
+# eza! https://github.com/eza-community/eza
 if hash eza 2>/dev/null; then
     alias ls='eza'
-fi
-
-# Create a preview command!
-# https://remysharp.com/2018/08/23/cli-improved#fzf--ctrlr
-if hash fzf 2>/dev/null; then
-    if hash bat 2>/dev/null; then
-        alias preview="fzf --preview 'bat --color \"always\" {}'"
-    else
-        alias preview="fzf --preview 'cat {}'"
-    fi
 fi

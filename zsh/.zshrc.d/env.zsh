@@ -10,16 +10,3 @@ fi
 # Set locale
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-# https://github.com/silvanocerza/dotfiles/blob/master/zsh/zshrc#L46
-#
-# If current selection is a text file shows its content,
-# if it's a directory shows its content, the rest is ignored
-FZF_CTRL_T_OPTS="--preview-window wrap --preview '
-if [[ -f {} ]]; then
-    file --mime {} | grep -q \"text\/.*;\" && bat --color \"always\" {} || (tput setaf 1; file --mime {})
-elif [[ -d {} ]]; then
-    ls -l --color {}
-else;
-    tput setaf 1; echo YOU ARE NOT SUPPOSED TO SEE THIS!
-fi'"

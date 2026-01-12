@@ -1,57 +1,119 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Start configuration added by Zim Framework install {{{
+#
+# User configuration sourced by interactive shells
+#
+
+# -----------------
+# Zsh configuration
+# -----------------
+
+#
+# History
+#
+
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
+
+#
+# Input/output
+#
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
+
+# Prompt for spelling correction of commands.
+#setopt CORRECT
+
+# Customize spelling correction prompt.
+#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+# --------------------
+# Module configuration
+# --------------------
+
+#
+# git
+#
+
+# Set a custom prefix for the generated aliases. The default prefix is 'G'.
+#zstyle ':zim:git' aliases-prefix 'g'
+
+#
+# input
+#
+
+# Append `../` to your input for each `.` you type after an initial `..`
+#zstyle ':zim:input' double-dot-expand yes
+
+#
+# zsh-autosuggestions
+#
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Customize the style that the suggestions are shown with.
+# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+#
+# zsh-syntax-highlighting
+#
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
+#typeset -A ZSH_HIGHLIGHT_STYLES
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+
+# ------------------
+# Initialize modules
+# ------------------
+
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
-
-# Path to your oh-my-zsh installation
-export ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-COMPLETION_WAITING_DOTS="true"
-
-# Timestamp history output
-HIST_STAMPS="yyyy-mm-dd"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(zsh-syntax-highlighting zsh-autosuggestions docker docker-compose extract httpie colored-man-pages fzf)
-
-# Load up Oh-My-Zsh
-source $ZSH/oh-my-zsh.sh
-
-# powerlevel10k prompt
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Load all *.zsh files from ./rc.d directory.
-MYPATH="$( cd -- "$(dirname -- "$0")" >/dev/null 2>&1 ; pwd -P )"
-if [ -d $MYPATH/.zshrc.d ]; then
-  for file in $MYPATH/.zshrc.d/*.zsh; do
-    source $file
-  done
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init
 fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
+# }}} End configuration added by Zim Framework install
 
-# Load all *.zsh files from the local ~/.zshrc-local.d directory.
-# These are not in this repo as this path is intended for machine specific
-# and or secret configs.
-if [ -d $HOME/.zshrc-local.d ]; then
-  for file in $HOME/.zshrc-local.d/*.zsh; do
-    source $file
-  done
+# Load zshrc snippets.
+for config in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh(N); do
+  source "$config"
+done
+
+# Load user overrides.
+for config in ${ZDOTDIR:-$HOME}/.zshrc-local.d/*.zsh(N); do
+  source "$config"
+done
+
+# starship
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
 fi

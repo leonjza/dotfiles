@@ -1,33 +1,12 @@
 # ⚡️.dotfiles | batteries included dotfile configurations
 
-This repository contains my public dotfiles. It comes with a single installer that will take care of installing, updating and backing up your existing configurations while using `stow`.
-
-![shell](screenshots/shell.png)
-
-## toc
-
-- [installing](#installing)
-- [overrides](#overrides)
-- [uninstalling](#uninstalling)
-- [updating](#updating)
-- [backups](#backups)
-- [whats included](#whats-included)
-
-## recommended software
-
-These dotfiles configure a few programs. Most of them are for convenience, and apart from the required programs which the installer will complain about, are completely optional.
-
-- [yabai](https://github.com/koekeishiya/yabai) - a tiling window manager (macOS only)
-- [skhd](https://github.com/koekeishiya/skhd) - a hotkey daemon (macOS only)
-- [eza](https://github.com/eza-community/eza) - a modern replacement for ls
-- [bat](https://github.com/sharkdp/bat) - a cat clone
-- [neovim](https://neovim.io/) - a vim-fork focused on extensibility and usability
+This repository contains my public dotfiles. It uses `stow` to manage symlinks and a small helper script for backups.
 
 ## installing
 
 You probably want to fork this repo unless you are happy with exactly what I have here. Regardless, clone the repo somewhere. This will become the source of your dotfiles too.
 
-The recommended font (with all of the icons etc.) is Meslo Nerd Font, and is documented [here](https://github.com/romkatv/powerlevel10k/blob/master/font.md).
+A Nerd Font is recommended for prompt icons (for example, from [Nerd Fonts](https://www.nerdfonts.com/)).
 
 With the font installed and configured to be used in your terminal, clone the repo:
 
@@ -36,36 +15,13 @@ git clone https://github.com/leonjza/dotfiles.git
 cd dotfiles
 ```
 
-Once cloned, run the setup install script.
+Once cloned, stow the configurations.
 
-```text
-./install
-      _       _    __ _ _
-     | |     | |  / _(_) |
-   __| | ___ | |_| |_ _| | ___  ___
-  / _` |/ _ \| __|  _| | |/ _ \/ __|
- | (_| | (_) | |_| | | | |  __/\__ \
-  \__,_|\___/ \__|_| |_|_|\___||___/
-    by @leonjza
-    https://github.com/leonjza/dotfiles
-
-checking prerequisites...
-
-git (required) is available
-stow (required) is available
-curl (required) is available
-zsh (optional) is available
-nvim (optional) is available
-
-Usage: ./install <subcommand>
-Subcommands:
-  install     install software specific configuration
-  usage       echo this usage information
-  stow        stow configurations (aka, update symlinks)
-  unstow      remove symlinks (removing configs)
+```bash
+./install stow
 ```
 
-If there are any errors, i.e., a required command is missing then you'd need to install those first.
+You can also run `./install backup` to back up existing configs first, or `./install stow --dry-run` to preview backups.
 
 ## overrides
 
@@ -105,22 +61,9 @@ These dotfiles contain a number of maybe surprising things! Lets take a quick lo
 
 | Command        | Type           | Source  | Description |
 | ------------- |:-------------:|:------:| ------------|
-| `chain`      | alias      | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to `proxychains` |
-| `please` | alias  | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Run the last command again as root |
-| `nah` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to undo all of your changes in the current git branch |
-| `ports` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to view open ports on macOS |
-| `locate` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to make `mdfind` behave like `locate` on macOS |
-| `get`, `post`, `put`, `delete` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias for `httpie $method` |
-| `httpserver` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to start an HTTP server on an available open port |
-| `killjobs` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/aliases.zsh) | Convenience alias to kill all jobs in the current session |
-| `extract` | zsh plugin | [view](https://github.com/leonjza/dotfiles/blob/master/rc/zshrc) | _Very_ convenient alias plugin that lets you extract almost any archive with `extract something.tar.gz` |
-| `urlencode`, `urldecode` | alias | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Encode/Decode strings using url encoding |
-| `filetypes` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | List files in a directory as well as their types according to `file` |
-| `json` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Output a file in pretty formatted json |
-| `updatesoftware` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Update software in major package managers and OS |
-| `gpgencrypt` / `gpgdecrypt` | zsh function | [view](https://github.com/leonjza/dotfiles/blob/master/dotfiles.d/zshrc.d/functions.zsh) | Encrypt / Decrypt files using GPG |
-
-Apart from the commands, there are also things like:
-
-- A clean shell prompt. Shows current path and git branch of applicable.
-- `git` command auto completion as well as visual indicators of your current working branch and if your local branch has uncommitted changes.
+| `chain`      | alias      | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to `proxychains` |
+| `nah` | function | [view](zsh/.zshrc.d/aliases.zsh) | Reset tracked and untracked changes in the current git repo (with confirmation) |
+| `ports` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to view open ports on macOS |
+| `locate` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to make `mdfind` behave like `locate` on macOS |
+| `updatesoftware` | zsh function | [view](zsh/.zshrc.d/functions.zsh) | Update software in major package managers, zimfw, and Neovim plugins |
+| `newcryptvol` | zsh function | [view](zsh/.zshrc.d/functions.zsh) | Create a new encrypted volume on macOS |

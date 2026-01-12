@@ -2,31 +2,39 @@
 set -e
 
 cat <<"EOF"
-      _       _    __ _ _           
-     | |     | |  / _(_) |          
-   __| | ___ | |_| |_ _| | ___  ___ 
-  / _` |/ _ \| __|  _| | |/ _ \/ __|
- | (_| | (_) | |_| | | | |  __/\__ \
-  \__,_|\___/ \__|_| |_|_|\___||___/
+     __     __  ____ __      
+ ___/ /__  / /_/ _(_) /__ ___
+/ _  / _ \/ __/ _/ / / -_|_-<
+\_,_/\___/\__/_//_/_/\__/___/
 	    by @leonjza
 	https://github.com/leonjza/dotfiles
-
 EOF
 
-declare -a REQUIRED=( "git" "stow" "curl" )
+declare -a REQUIRED=( "stow" )
 declare -a OPTIONAL=( "zsh" "nvim" )
-declare -a STOWABLES=( "tmux" "zsh" "p10k" )
+declare -a STOWABLES=( "tmux" "zsh" "nvim" "starship" "zim" )
 
 ###
 function green() { command echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
 function red() { command echo -e "$(tput setaf 1)$*$(tput sgr0)"; }
 function yellow() { command echo -e "$(tput setaf 3)$*$(tput sgr0)"; }
+function header() { echo; command echo -e "$(tput bold)==> $*$(tput sgr0)"; }
+function status() {
+    local label=$1
+    shift
+
+    case "$label" in
+        OK) printf "%sOK%s %s\n" "$(tput setaf 2; tput bold)" "$(tput sgr0)" "$*" ;;
+        SKIP) printf "%sSKIP%s %s\n" "$(tput setaf 3; tput bold)" "$(tput sgr0)" "$*" ;;
+        FAIL) printf "%sFAIL%s %s\n" "$(tput setaf 1; tput bold)" "$(tput sgr0)" "$*" ;;
+        INFO) printf "%sINFO%s %s\n" "$(tput bold)" "$(tput sgr0)" "$*" ;;
+    esac
+}
 function fn_exists() { declare -F "$1" > /dev/null; }
 OKAY=true
 BACKUPDIR=$HOME/.config/dotfile-backups
 
-echo "checking prerequisites..."
-echo
+header "Checking prerequisites"
 
 # required tools
 for c in "${REQUIRED[@]}"
@@ -34,9 +42,9 @@ do
 	if ! command -v $c &> /dev/null
 	then
 		OKAY=false
-		red "$c (required) could not be found"
+		status FAIL "$c (required) not found"
 	else
-		green "$c (required) is available"
+		status OK "$c (required)"
 	fi
 done
 
@@ -45,109 +53,117 @@ for c in "${OPTIONAL[@]}"
 do
 	if ! command -v $c &> /dev/null
 	then
-		yellow "$c (optional) could not be found"
+		status SKIP "$c (optional) not found"
 	else
-		green "$c (optional) is available"
+		status OK "$c (optional)"
 	fi
 done
 
 if ! $OKAY
 then
-	red "install the required prerequisites first please"
+	status FAIL "Install the required prerequisites first"
 	exit 1
 fi
 
 function f_usage() {
+	header "Usage"
+	echo "$0 <subcommand>"
 	echo
-	echo "Usage: $0 <subcommand>"
 	echo "Subcommands:"
-    echo "  install     install software specific configuration"
     echo "  usage       echo this usage information"
+    echo "  backup      back up existing configs before stowing"
     echo "  stow        stow configurations (aka, update symlinks)"
     echo "  unstow      remove symlinks (removing configs)"
 }
 
 function f_backup() {
     target=$1
+    dry_run=${2:-false}
 
-    mkdir -p $BACKUPDIR
+    mkdir -p "$BACKUPDIR"
 
-    if [[ -f $c ]] # exists
+    if [[ -e $target ]] # exists
     then
-        if [[ ! -L $c ]] # and is not a symlink
+        if [[ ! -L $target ]] # and is not a symlink
         then
-            yellow "backing up $c to $BACKUPDIR"
-            mv $c $BACKUPDIR/$(basename $c)
+            local relpath=${target#"$HOME"/}
+            local dest="$BACKUPDIR/$relpath"
+            mkdir -p "$(dirname "$dest")"
+            if [[ $dry_run == true ]]; then
+                status INFO "Would back up $target -> $dest"
+            else
+                status OK "Backed up $target -> $dest"
+                mv "$target" "$dest"
+            fi
         fi
     fi
 }
 
+function f_backup_stow_targets() {
+    local dry_run=${1:-false}
+    header "Checking for existing configs to back up"
+
+    for s in "${STOWABLES[@]}"
+    do
+        if [[ ! -d $s ]]; then
+            continue
+        fi
+
+        local entry
+        while IFS= read -r -d '' entry; do
+            local base
+            base=$(basename "$entry")
+
+            if [[ $base == ".config" && -d $entry ]]; then
+                local config_entry
+                while IFS= read -r -d '' config_entry; do
+                    f_backup "$HOME/.config/$(basename "$config_entry")" "$dry_run"
+                done < <(find "$entry" -mindepth 1 -maxdepth 1 -print0)
+                continue
+            fi
+
+            f_backup "$HOME/$base" "$dry_run"
+        done < <(find "$s" -mindepth 1 -maxdepth 1 -print0)
+    done
+}
+
 # funcs
-function f_install() {
-
-	echo
-	read -r -p "happy to continue setup for the installed tools? [y/N] " -n 1
-	echo
-	if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
-		yellow "doing nothing"
-		exit 1
-	fi
-
-	# zsh
-    if command -v zsh &> /dev/null
-    then
-        green "installing oh-my-zsh and plugins"
-        f_backup "$HOME/.zshrc"
-
-    	# base oh-my-zsh
-        local temp="$(mktemp)"
-        curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o $temp
-        RUNZSH='no' sh $temp    # https://github.com/robbyrussell/oh-my-zsh/blob/master/tools/install.sh#L24
-        rm -f $temp
-
-        # install zsh-syntax-highlighting
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-        # install zsh-autosuggestions
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-        # install powerlevel10k
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    else
-        yellow "skipping oh-my-zsh"
-    fi
-
-    # neovim
-    if command -v nvim &> /dev/null
-    then
-        green "installing neovim config, astrovim"
-        git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-        rm -rf ~/.config/nvim/.git
-    else
-        yellow "skipping neovim config"
-    fi
-
-    # other targets that dont have anything to download but need backups
-    f_backup "$HOME/.tmux.conf"
-
-    green "installation done. use the stow subcommand to link configurations."
+function f_backup_cmd() {
+    header "Backing up configurations"
+    f_backup_stow_targets false
+    status OK "Backup complete"
 }
 
 function f_stow() {
-    echo "stowing configurations"
+    local dry_run=false
+    if [[ $1 == "--dry-run" ]]; then
+        dry_run=true
+    fi
+
+    f_backup_stow_targets "$dry_run"
+    if [[ $dry_run == true ]]; then
+        header "Dry run complete"
+        status INFO "No backups or stow performed"
+        return
+    fi
+    header "Stowing configurations"
 
     for s in "${STOWABLES[@]}"
     do
-        stow -t $HOME/ --restow $s
+        stow -t "$HOME/" --restow "$s"
     done
+    status OK "Stow complete"
 }
 
 function f_unstow() {
-    yellow "performing unstow"
-    echo "your old configs should be at $BACKUPDIR" 
+    header "Unstowing configurations"
+    status INFO "Your old configs should be at $BACKUPDIR"
 
     for s in "${STOWABLES[@]}"
     do
-        stow -t $HOME/ --delete $s
+        stow -t "$HOME/" --delete "$s"
     done
+    status OK "Unstow complete"
 }
 
 # parse commandline arguments
@@ -160,8 +176,8 @@ case $subcommand in
         shift
         if ! fn_exists f_${subcommand}
         then
-            echo "error: '$subcommand' is not a known command."
-            echo "  see: $0 usage"
+            status FAIL "'$subcommand' is not a known command."
+            status INFO "See: $0 usage"
             exit 1
         fi
         f_${subcommand} $@
