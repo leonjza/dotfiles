@@ -151,7 +151,9 @@ function f_stow() {
     for s in "${STOWABLES[@]}"
     do
         stow -t "$HOME/" --restow "$s"
+        status OK "Stowed $s"
     done
+    echo
     status OK "Stow complete"
 }
 
@@ -162,7 +164,9 @@ function f_unstow() {
     for s in "${STOWABLES[@]}"
     do
         stow -t "$HOME/" --delete "$s"
+        status OK "Unstowed $s"
     done
+    echo
     status OK "Unstow complete"
 }
 
