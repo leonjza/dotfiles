@@ -11,7 +11,6 @@
 # History
 #
 
-# Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
@@ -36,6 +35,20 @@ bindkey -e
 
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
+
+# --------------------
+# Custom configuration
+# --------------------
+
+# Load zshrc snippets.
+for config in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh(N); do
+  source "$config"
+done
+
+# Load local user overrides.
+for config in ${ZDOTDIR:-$HOME}/.zshrc-local.d/*.zsh(N); do
+  source "$config"
+done
 
 # --------------------
 # Module configuration
@@ -102,16 +115,6 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 # }}} End configuration added by Zim Framework install
-
-# Load zshrc snippets.
-for config in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh(N); do
-  source "$config"
-done
-
-# Load user overrides.
-for config in ${ZDOTDIR:-$HOME}/.zshrc-local.d/*.zsh(N); do
-  source "$config"
-done
 
 # starship
 if command -v starship >/dev/null 2>&1; then
