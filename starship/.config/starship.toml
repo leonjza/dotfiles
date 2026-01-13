@@ -2,10 +2,6 @@
 
 add_newline = false
 
-# A minimal left prompt
-#format = """$character"""
-
-# move the rest of the prompt to the right
 format = """$username\
 $hostname\
 $directory\
@@ -35,46 +31,19 @@ $container\
 $shell\
 $character"""
 
-[aws]
-symbol = " "
-
 [battery]
 disabled = false
 
 [[battery.display]]
 threshold = 50
 
-[bun]
-symbol = " "
-
-[c]
-symbol = " "
-
 [character]
 success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](purple)"
 
-[cpp]
-symbol = " "
-
-[cmake]
-symbol = " "
-
-[conda]
-symbol = " "
-
 [cmd_duration]
 min_time = 3_000
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[deno]
-symbol = " "
 
 [directory]
 read_only = " 󰌾"
@@ -82,27 +51,8 @@ style = "blue"
 truncation_length = 3
 truncation_symbol = '…/'
 
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fortran]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[gcloud]
-symbol = " "
-
 [git_branch]
 symbol = " "
-#format = "[$branch]($style)"
 style = "bright-black"
 
 [git_commit]
@@ -114,53 +64,14 @@ disabled = false
 [golang]
 symbol = " "
 
-[gradle]
-symbol = " "
-
-[guix_shell]
-symbol = " "
-
-[haskell]
-symbol = " "
-
-[haxe]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
 [hostname]
 ssh_symbol = " "
-
-[java]
-symbol = " "
-
-[julia]
-symbol = " "
-
-[kotlin]
-symbol = " "
-
-[lua]
-symbol = " "
 
 [memory_usage]
 symbol = "󰍛 "
 
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
-
 [nodejs]
 symbol = " "
-
-[ocaml]
-symbol = " "
 
 [os]
 disabled = false
@@ -216,45 +127,16 @@ Void = " "
 Windows = "󰍲 "
 Zorin = " "
 
-[package]
-symbol = "󰏗 "
-
-[perl]
-symbol = " "
-
 [php]
 symbol = " "
-
-[pijul_channel]
-symbol = " "
-
-[pixi]
-symbol = "󰏗 "
 
 [python]
 symbol = " "
 
-[rlang]
-symbol = "󰟔 "
-
 [ruby]
 symbol = " "
-
-[rust]
-symbol = "󱘗 "
-
-[scala]
-symbol = " "
 
 [status]
 symbol = " "
 disabled = false
 
-[swift]
-symbol = " "
-
-[xmake]
-symbol = " "
-
-[zig]
-symbol = " "
