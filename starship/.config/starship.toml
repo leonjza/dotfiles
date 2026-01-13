@@ -14,7 +14,6 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$docker_context\
 $golang\
 $nodejs\
 $php\
@@ -82,9 +81,6 @@ read_only = " 󰌾"
 style = "blue"
 truncation_length = 3
 truncation_symbol = '…/'
-
-[docker_context]
-symbol = " "
 
 [elixir]
 symbol = " "
