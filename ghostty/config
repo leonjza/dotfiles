@@ -32,6 +32,7 @@
 # # Just for example
 # resize-overlay-duration = 4s 200ms
 
+font-feature = -calt, -liga, -dlig
 font-family = InputMono
 font-size = 17
 
