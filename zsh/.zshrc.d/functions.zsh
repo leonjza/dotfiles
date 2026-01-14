@@ -25,14 +25,6 @@ function updatesoftware() {
         _us_header "Skipping zimfw (not installed)"
     fi
 
-    # Update Neovim plugins via Lazy
-    if hash nvim 2>/dev/null; then
-        _us_header "Updating Neovim plugins (Lazy)"
-        nvim --headless "+Lazy! sync" +qa
-    else
-        _us_header "Skipping Neovim (not installed)"
-    fi
-
     # Upgrade Homebrew
     if hash brew 2>/dev/null; then
         _us_header "Upgrading Homebrew, packages and casks"
