@@ -15,11 +15,7 @@ $nodejs\
 $php\
 $python\
 $rust\
-$swift\
 $memory_usage\
-$direnv\
-$env_var\
-$custom\
 $sudo\
 $cmd_duration\
 $jobs\
@@ -27,8 +23,6 @@ $battery\
 $time\
 $status\
 $os\
-$container\
-$shell\
 $character"""
 
 [battery]
@@ -48,21 +42,28 @@ min_time = 3_000
 [directory]
 read_only = " 󰌾"
 style = "blue"
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = '…/'
 
 [git_branch]
 symbol = " "
 style = "bright-black"
+format = "[$symbol$branch(:$remote_branch)]($style) "
 
 [git_commit]
 tag_symbol = '  '
 
 [git_metrics]
 disabled = false
+added_style = "green"
+deleted_style = "yellow"
+
+[git_status]
+style = "red"
 
 [golang]
 symbol = " "
+format = "[$symbol]($style)"
 
 [hostname]
 ssh_symbol = " "
@@ -72,6 +73,7 @@ symbol = "󰍛 "
 
 [nodejs]
 symbol = " "
+format = "[$symbol]($style)"
 
 [os]
 disabled = false
@@ -129,12 +131,11 @@ Zorin = " "
 
 [php]
 symbol = " "
+format = "[$symbol]($style)"
 
 [python]
 symbol = " "
-
-[ruby]
-symbol = " "
+format = "[${symbol}${pyenv_prefix} (($virtualenv) )]($style)"
 
 [status]
 symbol = " "
