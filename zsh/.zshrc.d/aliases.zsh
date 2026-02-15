@@ -8,6 +8,7 @@
 
 # git aliases
 alias g="git"
+alias gp="git pull"
 alias glog="git log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\""
 alias gcl="git clone --recurse-submodules"
 alias gss="git status --short -b"
