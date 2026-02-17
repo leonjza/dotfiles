@@ -1,80 +1,101 @@
 # ⚡️.dotfiles | batteries included dotfile configurations
 
-This repository contains my public dotfiles. It uses `stow` to manage symlinks and a small helper script for backups.
+This repository contains my public dotfiles. It uses `stow` for symlink management and a helper script for backup + stow workflows.
 
 ## installing
 
-You probably want to fork this repo unless you are happy with exactly what I have here. Regardless, clone the repo somewhere. This will become the source of your dotfiles too.
-
-A Nerd Font is recommended for prompt icons (for example, from [Nerd Fonts](https://www.nerdfonts.com/)).
-
-With the font installed and configured to be used in your terminal, clone the repo:
+Clone this repo somewhere and use it as the source of truth for your configs:
 
 ```bash
 git clone https://github.com/leonjza/dotfiles.git
 cd dotfiles
 ```
 
-Once cloned, stow the configurations.
+A Nerd Font is recommended for prompt icons (for example, from [Nerd Fonts](https://www.nerdfonts.com/)).
+
+Then stow the managed configs:
 
 ```bash
 ./install stow
 ```
 
-You can also run `./install backup` to back up existing configs first, or `./install stow --dry-run` to preview backups.
+`stow` currently manages:
+- `tmux`
+- `zsh`
+- `nvim`
+- `starship`
+- `zim`
+
+Preview backup detection without making changes:
+
+```bash
+./install stow --dry-run
+```
 
 ## recommended software
 
-This repo assumes or enhances the following tools. Some are optional, but a few aliases/functions light up when they are installed.
+These dotfiles assume or enhance the following tools:
 
-- `zsh` + `stow` (core shell and symlink manager)
+- `zsh` + `stow` (core shell + symlink manager)
 - `git` (aliases and workflows)
-- `neovim` (used by `vim` alias and plugin updates)
+- `neovim` (used by `vim` alias and editor setup)
 - `tmux` (included configuration)
-- `bat` (pretty `cat`)
-- `eza` (better `ls`)
+- `starship` (prompt setup in `.zshrc`)
+- `bat` (pretty `cat` alias)
+- `eza` (modern `ls` alias)
+- optional: `ghostty` (config is in this repo but not stowed by `install`)
 
 ## overrides
 
-If you want to override anything, or, include something that should not live in a git repo, then add your own `.zsh` files to `~/.zshrc-local.d`. Files ending with the `.zsh` extention in this path will be sourced when the shell starts.
+To override defaults or keep machine-local secrets/settings out of git, add your own `.zsh` files to `~/.zshrc-local.d`. Any files ending in `.zsh` there are sourced on shell startup.
 
 ## uninstalling
 
-If for any reason you just cant get to like these configurations, removing them should be as easy as:
+Remove managed symlinks with:
 
 ```bash
 ./install unstow
 ```
 
-Configuration backups would have been made to the `~/.config/dotfile-backups/` directory.
+This only removes symlinks for stowed packages. It does not automatically restore backups.
 
 ## updating
 
-If there are new changes that you want to pull, simply git pull this repo.
+Pull latest changes in this repo:
 
 ```bash
 cd /path/to/dotfiles
 git pull
 ```
 
-As everything is a symlink to the repo you'd typically just need to reload your shell (i.e., open a new tab).
+Because configs are symlinked, opening a new shell/tab is usually enough to pick up changes.
 
 ## backups
 
-During operation, the installer tries to create backups where it deems it to be the right thing to do. Backups are located at `~/.config/dotfile-backups/`.
+During `./install stow`, existing non-symlink configs that would conflict are moved to:
 
-## whats included
+`~/.config/dotfile-backups/`
 
-Configurations for `zsh`, `neovim` and `tmux`!  
-These dotfiles contain a number of maybe surprising things! Lets take a quick look.
+Backups keep their relative path (for example `~/.zshrc` -> `~/.config/dotfile-backups/.zshrc`).
 
-### zsh
+## what's included
+
+This repo includes configs for:
+
+- `zsh`
+- `nvim` (NvChad-based)
+- `tmux`
+- `starship`
+- `zim`
+- `ghostty` (manual use unless you stow it yourself)
+
+### zsh helpers
 
 | Command | Type | Source | Description |
 | ------------- |: -------------:|:------:| ------------|
-| `chain`      | alias      | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to `proxychains` |
-| `nah` | function | [view](zsh/.zshrc.d/aliases.zsh) | Reset tracked and untracked changes in the current git repo (with confirmation) |
-| `ports` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to view open ports on macOS |
+| `chain` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to `proxychains` / `proxychains4` |
+| `nah` | function | [view](zsh/.zshrc.d/functions.zsh) | Reset tracked and untracked changes in current git repo (with confirmation) |
+| `ports` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to view listening TCP ports on macOS |
 | `locate` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to make `mdfind` behave like `locate` on macOS |
-| `updatesoftware` | zsh function | [view](zsh/.zshrc.d/functions.zsh) | Update software in major package managers, zimfw, and Neovim plugins |
-| `newcryptvol` | zsh function | [view](zsh/.zshrc.d/functions.zsh) | Create a new encrypted volume on macOS |
+| `updatesoftware` | function | [view](zsh/.zshrc.d/functions.zsh) | Update common package managers and zimfw |
+| `newcryptvol` | function | [view](zsh/.zshrc.d/functions.zsh) | Create a new encrypted sparse volume on macOS |
