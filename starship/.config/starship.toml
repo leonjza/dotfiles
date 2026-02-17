@@ -4,7 +4,8 @@ add_newline = false
 command_timeout = 3000
 palette = "srcery"
 
-format = """$username\
+format = """[╭](color_brightblack) \
+$username\
 $hostname\
 $directory\
 $git_branch\
@@ -24,7 +25,7 @@ $jobs\
 $battery\
 $time\
 $status\
-$character"""
+\n$character"""
 
 [battery]
 disabled = false
@@ -36,9 +37,10 @@ discharging_symbol = "󰂃 "
 threshold = 50
 
 [character]
-success_symbol = "[›](color_green)"
-error_symbol = "[›](color_red)"
-vimcmd_symbol = "[‹](color_magenta)"
+format = "[╰─$symbol](color_brightblack) "
+success_symbol = "[](color_green)"
+error_symbol = "[](color_red)"
+vimcmd_symbol = "[](color_magenta)"
 
 [cmd_duration]
 min_time = 3_000
