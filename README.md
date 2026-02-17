@@ -1,5 +1,7 @@
 # ⚡️.dotfiles | batteries included dotfile configurations
 
+![dotfiles preview](images/preview.png)
+
 This repository contains my public dotfiles. It uses `stow` for symlink management and a helper script for backup + stow workflows.
 
 ## installing
