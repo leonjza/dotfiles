@@ -54,3 +54,5 @@ zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-autosuggestions
 # Zsh automated shell history isolation. https://github.com/leonjza/history-here
 zmodule leonjza/history-here
+# https://zsh-transient-prompt.olets.dev/
+zmodule olets/zsh-transient-prompt --source transient-prompt.plugin.zsh

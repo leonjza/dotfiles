@@ -49,8 +49,6 @@ format = "[󱎫 $duration]($style)"
 [directory]
 read_only = " 󰌾"
 style = "color_blue"
-truncation_length = 2
-fish_style_pwd_dir_length = 1
 
 [git_branch]
 symbol = "󰘬"

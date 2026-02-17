@@ -115,4 +115,19 @@ source ${ZIM_HOME}/init.zsh
 # starship
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
+
+  _starship_transient_prompt() {
+    starship prompt \
+      --terminal-width="$COLUMNS" \
+      --keymap="${KEYMAP:-}" \
+      --status="$STARSHIP_CMD_STATUS" \
+      --pipestatus="${STARSHIP_PIPE_STATUS[*]}" \
+      --cmd-duration="${STARSHIP_DURATION:-}" \
+      --jobs="$STARSHIP_JOBS_COUNT"
+  }
+
+  TRANSIENT_PROMPT_PROMPT='$(_starship_transient_prompt)'
+  TRANSIENT_PROMPT_RPROMPT=''
+  TRANSIENT_PROMPT_TRANSIENT_PROMPT='%F{8}─%f%F{2}%f '
+  PROMPT_EOL_MARK=''
 fi
