@@ -92,7 +92,7 @@ This repo includes configs for:
 ### zsh helpers
 
 | Command | Type | Source | Description |
-| ------------- |: -------------:|:------:| ------------|
+| --- | :---: | :---: | --- |
 | `chain` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to `proxychains` / `proxychains4` |
 | `nah` | function | [view](zsh/.zshrc.d/functions.zsh) | Reset tracked and untracked changes in current git repo (with confirmation) |
 | `ports` | alias | [view](zsh/.zshrc.d/aliases.zsh) | Convenience alias to view listening TCP ports on macOS |
