@@ -36,38 +36,38 @@ discharging_symbol = "󰂃 "
 threshold = 50
 
 [character]
-success_symbol = "[❯](color_green)"
-error_symbol = "[❯](color_red)"
-vimcmd_symbol = "[❮](color_magenta)"
+success_symbol = "[›](color_green)"
+error_symbol = "[›](color_red)"
+vimcmd_symbol = "[‹](color_magenta)"
 
 [cmd_duration]
 min_time = 3_000
-format = "[󱎫 $duration]($style) "
+format = "[󱎫 $duration]($style)"
 
 [directory]
 read_only = " 󰌾"
 style = "color_blue"
 truncation_length = 2
-truncation_symbol = '…/'
 fish_style_pwd_dir_length = 1
 
 [git_branch]
-symbol = "󰘬 "
+symbol = "󰘬"
 style = "color_brightblack"
-format = "[$symbol$branch(:$remote_branch)]($style) "
+format = "[$symbol $branch(:$remote_branch)]($style) "
 
 [git_commit]
 tag_symbol = '  '
 
 [git_metrics]
 disabled = false
-format = '[↑$added]($added_style)[·](color_brightblack)[↓$deleted]($deleted_style) '
+format = '([↑$added]($added_style) )([↓$deleted]($deleted_style) )'
 only_nonzero_diffs = true
 added_style = "color_green"
 deleted_style = "color_red"
 
 [git_status]
-style = "color_brightblack"
+style = "color_teal"
+format = "([\\[$all_status$ahead_behind\\]]($style) )"
 conflicted = "✖"
 ahead = "⇡${count}"
 behind = "⇣${count}"
@@ -80,8 +80,8 @@ renamed = "󰁕${count}"
 deleted = "󰆴${count}"
 
 [golang]
-symbol = "󰟓 "
-format = "[$symbol]($style)"
+symbol = "󰟓"
+format = "[$symbol]($style) "
 
 [hostname]
 ssh_symbol = "󰣀 "
@@ -90,19 +90,19 @@ ssh_symbol = "󰣀 "
 symbol = "󰍛 "
 
 [nodejs]
-symbol = "󰎙 "
-format = "[$symbol]($style)"
+symbol = "󰎙"
+format = "[$symbol]($style) "
 
 [php]
-symbol = "󰌟 "
-format = "[$symbol]($style)"
+symbol = "󰌟"
+format = "[$symbol]($style) "
 
 [python]
-symbol = "󰌠 "
-format = "[${symbol}${pyenv_prefix} (($virtualenv) )]($style)"
+symbol = "󰌠"
+format = "[${symbol}${pyenv_prefix}($virtualenv)]($style) "
 
 [status]
-symbol = "󰅚 "
+symbol = "× "
 disabled = false
 
 [palettes.srcery]
