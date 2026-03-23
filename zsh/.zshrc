@@ -128,6 +128,6 @@ if command -v starship >/dev/null 2>&1; then
 
   TRANSIENT_PROMPT_PROMPT='$(_starship_transient_prompt)'
   TRANSIENT_PROMPT_RPROMPT=''
-  TRANSIENT_PROMPT_TRANSIENT_PROMPT='%F{8}─%f%F{2}%f '
+  TRANSIENT_PROMPT_TRANSIENT_PROMPT='%F{8}$%f '
   PROMPT_EOL_MARK=''
 fi

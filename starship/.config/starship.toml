@@ -37,9 +37,9 @@ discharging_symbol = "󰂃 "
 threshold = 50
 
 [character]
-format = "[╰─$symbol](color_brightblack) "
-success_symbol = "[](color_green)"
-error_symbol = "[](color_red)"
+format = "[╰](color_brightblack) [$symbol](color_green) "
+success_symbol = "[›_](color_green)"
+error_symbol = "[›_](color_red)"
 vimcmd_symbol = "[](color_magenta)"
 
 [cmd_duration]
