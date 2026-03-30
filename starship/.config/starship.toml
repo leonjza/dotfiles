@@ -35,6 +35,7 @@ discharging_symbol = "󰂃 "
 
 [[battery.display]]
 threshold = 50
+style = "color_brightblack"
 
 [character]
 format = "[╰](color_brightblack) [$symbol](color_green) "
