@@ -22,6 +22,7 @@ Then stow the managed configs:
 ```
 
 `stow` currently manages:
+- `bat`
 - `tmux`
 - `zsh`
 - `nvim`
@@ -84,6 +85,7 @@ Backups keep their relative path (for example `~/.zshrc` -> `~/.config/dotfile-b
 
 This repo includes configs for:
 
+- `bat` (`gruvbox-dark` theme)
 - `zsh`
 - `nvim` (NvChad-based)
 - `tmux`

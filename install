@@ -11,8 +11,8 @@ cat <<"EOF"
 EOF
 
 declare -a REQUIRED=( "stow" )
-declare -a OPTIONAL=( "zsh" "nvim" )
-declare -a STOWABLES=( "tmux" "zsh" "nvim" "starship" "zim" )
+declare -a OPTIONAL=( "zsh" "nvim" "bat" )
+declare -a STOWABLES=( "bat" "tmux" "zsh" "nvim" "starship" "zim" )
 
 ###
 function green() { command echo -e "$(tput setaf 2; tput bold)$*$(tput sgr0)"; }
