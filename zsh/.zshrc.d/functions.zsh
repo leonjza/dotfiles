@@ -19,7 +19,10 @@ function updatesoftware() {
 
     # Update zimfw and its modules
     if type zimfw >/dev/null 2>&1; then
-        _us_header "Updating zimfw and modules"
+        _us_header "Upgrading zimfw"
+        zimfw upgrade
+
+        _us_header "Updating zimfw modules"
         zimfw update
     else
         _us_header "Skipping zimfw (not installed)"
